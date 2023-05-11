@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('periode_id')->constrained('periodes');
             $table->foreignId('user_id')->constrained('users');
             $table->unsignedBigInteger('jumlah');
+            $table->enum('status', ['Belum lunas', 'Lunas']);
             $table->timestamps();
         });
     }

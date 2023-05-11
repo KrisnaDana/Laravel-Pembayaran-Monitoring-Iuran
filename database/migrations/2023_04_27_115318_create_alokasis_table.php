@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('iuran_id')->constrained('iurans');
             $table->string('nama');
             $table->text('deskripsi')->nullable();
+            $table->string('foto')->nullable();
             $table->unsignedBigInteger('jumlah');
             $table->timestamps();
         });
