@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('telepon');
             $table->string('alamat');
             $table->string('foto')->nullable();
+            $table->string('scan_ktp');
+            $table->enum('status', ['Belum terverifikasi', 'Terverifikasi']);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pembayarans', function (Blueprint $table) {
+        Schema::create('periode_bayars', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('periode_id')->constrained('periodes');
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('iuran_id')->constrained('iurans');
             $table->unsignedBigInteger('jumlah');
-            $table->enum('metode', ['cash', 'transfer']);
-            $table->string('bukti_transfer')->nullable();
-            $table->enum('status', ['Belum lunas', 'Lunas']);
             $table->timestamps();
         });
     }
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pembayarans');
+        Schema::dropIfExists('periode_bayars');
     }
 };

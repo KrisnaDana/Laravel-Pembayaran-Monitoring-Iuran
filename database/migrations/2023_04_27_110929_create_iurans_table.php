@@ -16,10 +16,14 @@ return new class extends Migration
             $table->string('nama');
             $table->text('deskripsi')->nullable();
             $table->text('tujuan_transfer')->nullable(); //serialize [platform, atas nama, no]
-            $table->unsignedBigInteger('kebutuhan');
+            $table->unsignedBigInteger('jumlah'); // jumlah pembayaran diperlukan
             $table->unsignedBigInteger('terkumpul')->default(0);
             $table->unsignedBigInteger('tersisa');
-            $table->date('terakhir');
+            // $table->date('terakhir');
+            $table->enum('jenis', ['Sekali', 'Periodik']);
+            $table->date('mulai');
+            $table->date('akhir')->nullable();
+            $table->integer('jarak_periode')->nullable(); // dalam hari
             $table->string('gambar');
             $table->timestamps();
         });
