@@ -20,6 +20,10 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function periode_bayars(): HasMany{
+        return $this->hasMany(PeriodeBayar::class);
+    }
+
     public function pembayarans(): HasMany {
         return $this->hasMany(Pembayaran::class);
     }
