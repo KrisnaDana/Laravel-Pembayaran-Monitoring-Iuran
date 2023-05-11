@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('iuran_id')->constrained('iurans');
             $table->unsignedBigInteger('jumlah');
-            $table->enum('metode', ['cash', 'transfer']);
+            $table->enum('metode', ['Offline', 'Online']);
             $table->string('bukti_transfer')->nullable();
             $table->enum('status', ['Belum lunas', 'Lunas']);
             $table->timestamps();

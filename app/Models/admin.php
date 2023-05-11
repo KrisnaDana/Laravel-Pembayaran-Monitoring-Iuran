@@ -19,7 +19,4 @@ class Admin extends Authenticatable
         'remember_token',
     ];
 
-    public function diskusis(): HasMany {
-        return $this->hasMany(Diskusis::class);
-    }
 }

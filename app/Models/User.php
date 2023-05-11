@@ -27,8 +27,4 @@ class User extends Authenticatable
     public function pembayarans(): HasMany {
         return $this->hasMany(Pembayaran::class);
     }
-
-    public function diskusis(): HasMany {
-        return $this->hasMany(Diskusis::class);
-    }
 }
