@@ -21,17 +21,7 @@ class Admin
         }
 
         if(Auth::guard('user')->check()){
-            if(Auth::guard('user')->user()->status == 'Aktif'){
-                return redirect()->route('view-dashboard');
-            }
-
-            if(Auth::guard('user')->user()->status == 'Belum aktif'){
-                return redirect()->route('login')->with(['error' => 'Menunggu verifikasi akun']);
-            }
-
-            if(Auth::guard('user')->user()->status == 'Tidak aktif'){
-                return redirect()->route('login')->with(['error' => 'Akun anda tidak aktif']);
-            }
+            return redirect()->route('view-dashboard');
         }
 
         return redirect()->route('admin-view-login');

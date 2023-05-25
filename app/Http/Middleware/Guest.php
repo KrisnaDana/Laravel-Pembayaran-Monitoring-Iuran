@@ -18,17 +18,7 @@ class Guest
     {
 
         if(Auth::guard('user')->check()){
-            if(Auth::guard('user')->user()->status == 'Aktif'){
-                return redirect()->route('view-dashboard');
-            }
-
-            if(Auth::guard('user')->user()->status == 'Belum aktif'){
-                return redirect()->route('view-login')->with(['error' => 'Menunggu verifikasi akun']);
-            }
-
-            if(Auth::guard('user')->user()->status == 'Tidak aktif'){
-                return redirect()->route('view-login')->with(['error' => 'Akun anda tidak aktif']);
-            }
+            return redirect()->route('view-dashboard');
         }
 
         if(Auth::guard('admin')->check()){

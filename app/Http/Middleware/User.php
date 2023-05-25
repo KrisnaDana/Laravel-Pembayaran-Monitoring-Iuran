@@ -22,12 +22,11 @@ class User
                 return $next($request);
             }
 
-            if(Auth::guard('user')->user()->status == 'Belum aktif'){
-                return redirect()->route('view-login')->with(['error' => 'Menunggu verifikasi akun']);
-            }
-
-            if(Auth::guard('user')->user()->status == 'Tidak aktif'){
-                return redirect()->route('view-login')->with(['error' => 'Akun anda tidak aktif']);
+            if(Auth::guard('user')->user()->status == 'Non-aktif'){
+                Auth::guard('user')->logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+                return redirect()->route('view-login')->with(['error' => 'Akun telah dinonaktifkan. Hubungi admin untuk mengetahui informasi lebih lanjut']);
             }
         }
 

@@ -18,9 +18,10 @@ return new class extends Migration
             $table->string('nama');
             $table->string('telepon');
             $table->string('alamat');
-            $table->string('foto')->nullable();
-            $table->string('scan'); // filename ktp atau keterangan bukti tinggal
-            $table->enum('status', ['Belum aktif', 'Aktif', 'Tidak aktif']);
+            $table->string('file_verifikasi')->nullable(); // ktp untuk sesuai domisili, surat keterangan domisili untuk ktp tidak sesuai domisili
+            $table->enum('verifikasi', ['Belum terverifikasi', 'Mengajukan verifikasi', 'Perbaikan verifikasi', 'Terverifikasi']);
+            $table->text('catatan_verifikasi')->nullable();
+            $table->enum('status', ['Aktif', 'Non-aktif']);
             $table->rememberToken();
             $table->timestamps();
         });
