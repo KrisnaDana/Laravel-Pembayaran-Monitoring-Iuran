@@ -34,7 +34,7 @@ class AdminAuthController extends Controller
         return redirect()->route('admin-view-login');
     }
 
-    public function dashboard(): View {
+    public function viewDashboard(): View {
         return view('admin.dashboard');
     }
 
