@@ -5,9 +5,18 @@ use App\Http\Middleware\Guest;
 use App\Http\Middleware\User;
 use App\Http\Middleware\UserTerverifikasi;
 use App\Http\Middleware\Admin;
+use App\Http\Middleware\Master;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\MasterKelolaAkunAdminController;
+use App\Http\Controllers\AdminKelolaAkunUserController;
+use App\Http\Controllers\AdminIuranController;
+use App\Http\Controllers\AdminAlokasiController;
+use App\Http\Controllers\AdminPeriodeController;
+use App\Http\Controllers\AdminPembayaranController;
+use App\Http\Controllers\UserIuranController;
+use App\Http\Controllers\UserPembayaranController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,5 +58,9 @@ Route::middleware(['throttle:60,1'])->group(function() {
         Route::get('/admin/dashboard', [AdminAuthController::class, 'viewDashboard'])->name('admin-view-dashboard');
         Route::get('/admin/profile', [AdminAuthController::class, 'viewProfile'])->name('admin-view-profile');
         Route::post('/admin/profile', [AdminAuthController::class, 'profile'])->name('admin-profile');
+    });
+
+    Route::middleware([Master::class])->group(function () {
+        //
     });
 });

@@ -18,7 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger('jumlah');
             $table->enum('metode', ['Offline', 'Online']);
             $table->string('bukti_transfer')->nullable();
-            $table->enum('status', ['Belum terverifikasi', 'Terverifikasi']);
+            $table->enum('status', ['Belum terverifikasi', 'Mengajukan pembayaran', 'Perbaikan pembayaran', 'Terverifikasi', 'Dibatalkan']);
+            $table->text('catatan_pembayaran')->nullable();
             $table->timestamps();
         });
     }

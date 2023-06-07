@@ -16,6 +16,10 @@
       <link rel="stylesheet" href="{{url('/admin/css/style.css')}}" />
    </head>
    <body>
+    @php
+        $user = Auth::guard('user')->user();
+        $admin = Auth::guard('admin')->user();
+    @endphp
         @if($toast = Session::get('toast'))
             <div style="display: flex; justify-content: flex-end" id="toast">
                 @if($toast["type"] == "success")
@@ -47,27 +51,35 @@
                 <div class="inner_container">
                     <nav id="sidebar">
                         <header class="sidebar_blog_2">
-                            @if(Auth::guard('admin')->check())
+                            @if(!empty($admin) && $admin->role == "Master")
+                                <h4 class="text-center">MASTER - SIBAMI</h4>
+                            @elseif(!empty($admin) && $admin->role == "Admin")
                                 <h4 class="text-center">ADMIN - SIBAMI</h4>
-                            @elseif(Auth::guard('user')->check())
+                            @elseif(!empty($user))
                                 <h4 class="text-center">SIBAMI</h4>
                             @endif
                             <ul class="list-unstyled components">
-                                @if(Auth::guard('admin')->check())
+                                @if(!empty($admin) && $admin->role == "Master")
                                 <li><a href="{{route('admin-view-dashboard')}}"><i class="fa fa-bar-chart-o red_color"></i> <span>Dashboard</span></a></li>
                                 <li>
                                     <a href="#tour" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-wrench green_color"></i> <span>Kelola Akun</span></a>
                                     <ul class="collapse list-unstyled" id="tour">
-                                        <li><a href="#"> <span>Admin</span></a></li>
-                                        <li><a href="#"> <span>User</span></a></li>
+                                        @if(!empty($admin) && $admin->role == "Master")
+                                            <li><a href="#"> <span>Admin</span></a></li>
+                                        @endif
+                                        @if(!empty($admin))
+                                            <li><a href="#"> <span>User</span></a></li>
+                                        @endif
                                     </ul>
                                 </li>
+                                @endif
+                                @if(!empty($admin))
                                 <li><a href="#"><i class="fa fa-university yellow_color"></i> <span>Iuran</span></a></li>
                                 <li><a href="#"><i class="fa fa-fire purple_color"></i> <span>Alokasi</span></a></li>
                                 <li><a href="#"><i class="fa fa-flag red_color"></i> <span>Periode</span></a></li>
                                 <li><a href="#"><i class="fa fa-calendar-o green_color"></i> <span>Pembayaran</span></a></li>
                                 @endif
-                                @if(Auth::guard('user')->check())
+                                @if(!empty($user))
                                 <li><a href="{{route('view-dashboard')}}"><i class="fa fa-calendar-o green_color"></i> <span>Dashboard</span></a></li>
                                 <li><a href="#"><i class="fa fa-graduation-cap blue1_color"></i> <span>Iuran</span></a></li>
                                 <li><a href="#"><i class="fa fa-group orange_color"></i> <span>Pembayaran</span></a></li>
@@ -88,14 +100,14 @@
                                         <div class="icon_info">
                                             <ul class="user_profile_dd">
                                                 <li>
-                                                    @if(Auth::guard('admin')->check())
+                                                    @if(!empty($admin))
                                                         <a class="dropdown-toggle" data-toggle="dropdown"><img class="img-responsive rounded-circle" src="{{url('/img/logo-sd-2023.png')}}" alt="profile" /><span class="name_user">{{Auth::guard('admin')->user()->username}}</span></a>
                                                         <div class="dropdown-menu">
                                                             <a class="dropdown-item" href="#">Profile</a>
                                                             <a class="dropdown-item" href="{{route('admin-logout')}}">Log Out</a>
                                                         </div>
                                                     @endif
-                                                    @if(Auth::guard('user')->check())
+                                                    @if(!empty($user))
                                                         <a class="dropdown-toggle" data-toggle="dropdown"><img class="img-responsive rounded-circle" src="{{url('/img/logo-sd-2023.png')}}" alt="profile" /><span class="name_user">{{Auth::guard('user')->user()->username}}</span></a>
                                                         <div class="dropdown-menu">
                                                             <a class="dropdown-item" href="#">Profile</a>
