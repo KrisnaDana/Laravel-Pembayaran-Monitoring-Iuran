@@ -58,6 +58,10 @@ Route::middleware(['throttle:60,1'])->group(function() {
         Route::get('/admin/dashboard', [AdminAuthController::class, 'viewDashboard'])->name('admin-view-dashboard');
         Route::get('/admin/profile', [AdminAuthController::class, 'viewProfile'])->name('admin-view-profile');
         Route::post('/admin/profile', [AdminAuthController::class, 'profile'])->name('admin-profile');
+
+        // Admin Iuran
+        Route::get('/admin/iuran', [AdminIuranController::class, 'viewIuran'])->name('admin-view-iuran');
+
     });
 
     Route::middleware([Master::class])->group(function () {
