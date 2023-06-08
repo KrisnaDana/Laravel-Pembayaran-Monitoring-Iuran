@@ -1,68 +1,10 @@
 @extends('layout.pluto')
 
-@section('page_title','Iuran')
-
 @section('content')
-
-<div class="row column1">
-    <div class="col-md-6 col-lg-3">
-        <div class="full counter_section margin_bottom_30 yellow_bg">
-            <div class="couter_icon">
-                <div> 
-                <i class="fa fa-sign-in"></i>
-                </div>
-            </div>
-            <div class="counter_no">
-                <div>
-                <p class="total_no">2500</p>
-                <p class="head_couter">Total Penerimaan</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6 col-lg-3">
-        <div class="full counter_section margin_bottom_30 blue1_bg">
-            <div class="couter_icon">
-                <div> 
-                <i class="fa fa-sign-out"></i>
-                </div>
-            </div>
-            <div class="counter_no">
-                <div>
-                <p class="total_no">123.50</p>
-                <p class="head_couter">Total Pengeluaran</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6 col-lg-3">
-        <div class="full counter_section margin_bottom_30 green_bg">
-            <div class="couter_icon">
-                <div> 
-                <i class="fa fa-money"></i>
-                </div>
-            </div>
-            <div class="counter_no">
-                <div>
-                <p class="total_no">1,805</p>
-                <p class="head_couter">Saldo</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6 col-lg-3">
-        <div class="full counter_section margin_bottom_30 red_bg">
-            <div class="couter_icon">
-                <div> 
-                <i class="fa fa-check-square"></i>
-                </div>
-            </div>
-            <div class="counter_no">
-                <div>
-                <p class="total_no">54</p>
-                <p class="head_couter">Jumlah Iuran Aktif</p>
-                </div>
-            </div>
+<div class="row column_title">
+    <div class="col-md-12">
+        <div class="page_title">
+            <h2>Iuran</h2>
         </div>
     </div>
 </div>
@@ -70,9 +12,9 @@
 <div class="row column2 graph margin_bottom_30">
     <div class="col-md-12 col-lg-12">
         <div class="button_block">
-            <button type="button" class="btn cur-p btn-primary">
+            <a href="{{ route('admin-create-iuran') }}" type="button" class="btn cur-p btn-primary">
                 <i class="fa fa-plus">&nbsp;</i>Tambah Data Iuran
-            </button>
+            </a>
         </div>
     </div>
 </div>
@@ -85,9 +27,11 @@
                 <h2>Tabel Data Iuran</h2>
                 </div>
             </div>
+            
             <div class="table_section padding_infor_info ">
                 <div class="table-responsive-sm">
                 <table class="table table-bordered">
+
                     <thead>
                         <tr>
                             <th>No.</th>
@@ -117,10 +61,10 @@
                         @endforeach
                     </tbody>
                 </table>
-                </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 
