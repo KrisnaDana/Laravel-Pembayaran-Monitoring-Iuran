@@ -5,7 +5,7 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>SIBAMI</title>
-      <link rel="icon" href="{{url('/img/logo-sd-2023.png')}}" type="image/png" />
+      <link rel="icon" type="image/png" href="{{url('img/icon.png')}}">
       <link rel="stylesheet" href="{{url('/pluto/css/bootstrap.min.css')}}" />
       <link rel="stylesheet" href="{{url('/pluto/style.css')}}" />
       <link rel="stylesheet" href="{{url('/pluto/css/responsive.css')}}" />
@@ -13,7 +13,6 @@
       <link rel="stylesheet" href="{{url('/pluto/css/bootstrap-select.css')}}" />
       <link rel="stylesheet" href="{{url('/pluto/css/perfect-scrollbar.css')}}" />
       <link rel="stylesheet" href="{{url('/pluto/css/custom.css')}}" />
-      <link rel="stylesheet" href="{{url('/admin/css/style.css')}}" />
       @livewireStyles
    </head>
    <body>
@@ -73,6 +72,9 @@
                                         @endif
                                     </ul>
                                 </li>
+                                @if(!empty($admin) && $admin->role == "Admin")
+                                <li><a href="#"><i class="fa fa-wrench green_color"></i> <span>Kelola User</span></a></li></li>
+                                @endif
                                 @endif
                                 @if(!empty($admin))
                                 <li><a href="#"><i class="fa fa-university yellow_color"></i> <span>Iuran</span></a></li>
@@ -124,13 +126,6 @@
                         </div>
                         <main class="midde_cont">
                             <div class="container-fluid">
-                                <div class="row column_title">
-                                    <div class="col-md-12">
-                                        <div class="page_title">
-                                            <h2>@yield('page_title')</h2>
-                                        </div>
-                                    </div>
-                                </div>
                                 @yield('content')
                             </div>
                         </main>
