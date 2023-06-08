@@ -14,6 +14,7 @@
       <link rel="stylesheet" href="{{url('/pluto/css/perfect-scrollbar.css')}}" />
       <link rel="stylesheet" href="{{url('/pluto/css/custom.css')}}" />
       <link rel="stylesheet" href="{{url('/admin/css/style.css')}}" />
+      @livewireStyles
    </head>
    <body>
     @php
@@ -141,5 +142,6 @@
             var ps = new PerfectScrollbar('#sidebar');
         </script>
         <script src="{{url('/pluto/js/custom.js')}}"></script>
+        @livewireScripts
     </body>
 </html>

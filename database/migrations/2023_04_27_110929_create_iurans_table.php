@@ -25,7 +25,7 @@ return new class extends Migration
             $table->date('mulai');
             $table->date('akhir')->nullable();
             $table->integer('jarak_periode')->nullable(); // dalam hari
-            $table->string('gambar');
+            $table->string('gambar')->nullable();
             $table->timestamps();
         });
     }
