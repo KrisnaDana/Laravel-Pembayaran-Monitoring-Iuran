@@ -72,9 +72,9 @@
                                         @endif
                                     </ul>
                                 </li>
+                                @endif
                                 @if(!empty($admin) && $admin->role == "Admin")
                                 <li><a href="#"><i class="fa fa-wrench green_color"></i> <span>Kelola User</span></a></li></li>
-                                @endif
                                 @endif
                                 @if(!empty($admin))
                                 <li><a href="#"><i class="fa fa-university yellow_color"></i> <span>Iuran</span></a></li>
