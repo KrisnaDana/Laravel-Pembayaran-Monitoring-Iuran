@@ -63,6 +63,10 @@ Route::middleware(['throttle:60,1'])->group(function() {
         Route::get('/admin/iuran', [AdminIuranController::class, 'viewIuran'])->name('admin-view-iuran');
         Route::get('/admin/create-iuran', [AdminIuranController::class, 'createIuran'])->name('admin-create-iuran');
 
+        //Alokasi
+        Route::get('/admin/alokasi', [AdminAlokasiController::class, 'viewAlokasi'])->name('admin-view-alokasi');
+        Route::get('/admin/create-alokasi', [AdminAlokasiController::class, 'createAlokasi'])->name('admin-create-alokasi');
+        Route::post('/admin/create-alokasi', [AdminAlokasiController::class, 'storeAlokasi'])->name('admin-create-alokasi-store');
     });
 
     Route::middleware([Master::class])->group(function () {
