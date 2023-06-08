@@ -124,6 +124,13 @@
                         </div>
                         <main class="midde_cont">
                             <div class="container-fluid">
+                                <div class="row column_title">
+                                    <div class="col-md-12">
+                                        <div class="page_title">
+                                            <h2>@yield('page_title')</h2>
+                                        </div>
+                                    </div>
+                                </div>
                                 @yield('content')
                             </div>
                         </main>

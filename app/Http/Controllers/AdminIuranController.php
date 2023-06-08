@@ -11,4 +11,9 @@ class AdminIuranController extends Controller
         $iurans = Iuran::all();
         return view('admin.iuran.viewIuran', compact('iurans'));
     }
+
+    public function createIuran() {
+        $iurans = Iuran::all();
+        return view('admin.iuran.createIuran',compact('iurans'));
+    }
 }

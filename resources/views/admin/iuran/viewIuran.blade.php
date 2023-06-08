@@ -1,27 +1,21 @@
 @extends('layout.pluto')
 
-@section('content')
+@section('page_title','Iuran')
 
-<div class="row column_title">
-    <div class="col-md-12">
-        <div class="page_title">
-            <h2>Iuran</h2>
-        </div>
-    </div>
-</div>
+@section('content')
 
 <div class="row column1">
     <div class="col-md-6 col-lg-3">
         <div class="full counter_section margin_bottom_30 yellow_bg">
             <div class="couter_icon">
                 <div> 
-                <i class="fa fa-user"></i>
+                <i class="fa fa-sign-in"></i>
                 </div>
             </div>
             <div class="counter_no">
                 <div>
                 <p class="total_no">2500</p>
-                <p class="head_couter">Welcome</p>
+                <p class="head_couter">Total Penerimaan</p>
                 </div>
             </div>
         </div>
@@ -30,13 +24,13 @@
         <div class="full counter_section margin_bottom_30 blue1_bg">
             <div class="couter_icon">
                 <div> 
-                <i class="fa fa-clock-o"></i>
+                <i class="fa fa-sign-out"></i>
                 </div>
             </div>
             <div class="counter_no">
                 <div>
                 <p class="total_no">123.50</p>
-                <p class="head_couter">Average Time</p>
+                <p class="head_couter">Total Pengeluaran</p>
                 </div>
             </div>
         </div>
@@ -45,13 +39,13 @@
         <div class="full counter_section margin_bottom_30 green_bg">
             <div class="couter_icon">
                 <div> 
-                <i class="fa fa-cloud-download"></i>
+                <i class="fa fa-money"></i>
                 </div>
             </div>
             <div class="counter_no">
                 <div>
                 <p class="total_no">1,805</p>
-                <p class="head_couter">Collections</p>
+                <p class="head_couter">Saldo</p>
                 </div>
             </div>
         </div>
@@ -60,13 +54,13 @@
         <div class="full counter_section margin_bottom_30 red_bg">
             <div class="couter_icon">
                 <div> 
-                <i class="fa fa-comments-o"></i>
+                <i class="fa fa-check-square"></i>
                 </div>
             </div>
             <div class="counter_no">
                 <div>
                 <p class="total_no">54</p>
-                <p class="head_couter">Comments</p>
+                <p class="head_couter">Jumlah Iuran Aktif</p>
                 </div>
             </div>
         </div>
@@ -114,9 +108,9 @@
                             <td>{{$iuran->nama}}</td>
                             <td>{{$iuran->deskripsi}}</td>
                             <td>{{$iuran->tujuan_transfer}}</td>
-                            <td>{{$iuran->jumlah}}</td>
-                            <td>{{$iuran->terkumpul}}</td>
-                            <td>{{$iuran->tersisa}}</td>
+                            <td>@currency($iuran->jumlah)</td>
+                            <td>@currency($iuran->terkumpul)</td>
+                            <td>@currency($iuran->tersisa)</td>
                             <td>{{$iuran->status}}</td>
                             <td>Action</td>
                         </tr>
@@ -128,5 +122,6 @@
         </div>
     </div>
 </div>
+
 
 @endsection
