@@ -29,7 +29,7 @@ use App\Http\Controllers\UserPembayaranController;
 |
 */
 
-Route::middleware(['throttle:60,1'])->group(function() {
+Route::middleware(['throttle:60,1'])->group(function () {
     Route::middleware([Guest::class])->group(function () {
         Route::get('/', [GuestController::class, 'index'])->name('index');
         Route::get('/login', [UserAuthController::class, 'viewLogin'])->name('view-login');
@@ -39,7 +39,7 @@ Route::middleware(['throttle:60,1'])->group(function() {
         Route::get('/admin/login', [AdminAuthController::class, 'viewLogin'])->name('admin-view-login');
         Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin-login');
     });
-    
+
     Route::middleware([User::class])->group(function () {
         Route::get('/logout', [UserAuthController::class, 'logout'])->name('logout');
         Route::get('/dashboard', [UserAuthController::class, 'viewDashboard'])->name('view-dashboard');
@@ -52,7 +52,7 @@ Route::middleware(['throttle:60,1'])->group(function() {
     Route::middleware([UserTerverifikasi::class])->group(function () {
         Route::get('/dashboard', [UserAuthController::class, 'viewDashboard'])->name('view-dashboard');
     });
-    
+
     Route::middleware([Admin::class])->group(function () {
         Route::get('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin-logout');
         Route::get('/admin/dashboard', [AdminAuthController::class, 'viewDashboard'])->name('admin-view-dashboard');
@@ -62,10 +62,13 @@ Route::middleware(['throttle:60,1'])->group(function() {
         // Admin Iuran
         Route::get('/admin/iuran', [AdminIuranController::class, 'viewIuran'])->name('admin-view-iuran');
         Route::get('/admin/create-iuran', [AdminIuranController::class, 'createIuran'])->name('admin-create-iuran');
-
     });
 
     Route::middleware([Master::class])->group(function () {
-        //
+        Route::get('/admin/master/list-admin', [MasterKelolaAkunAdminController::class, 'viewListAdmin'])->name('admin-master-view-list-admin');
+        Route::get('/admin/master/list-admin-create', [MasterKelolaAkunAdminController::class, 'createAdmin'])->name('admin-master-create-admin');
+        Route::post('/admin/master/list-admin-create-submit', [MasterKelolaAkunAdminController::class, 'createAdminSubmit'])->name('admin-master-create-admin-submit');
+        Route::get('/admin/master/list-admin-edit-{id}', [MasterKelolaAkunAdminController::class, 'editAdmin'])->name('admin-master-edit-admin');
+        Route::post('/admin/master/list-admin-edit-submit-{id}', [MasterKelolaAkunAdminController::class, 'editAdminSubmit'])->name('admin-master-edit-admin-submit');
     });
 });
