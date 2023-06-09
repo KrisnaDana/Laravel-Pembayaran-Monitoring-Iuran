@@ -19,7 +19,7 @@
 <div class="row">
     <div class="col">
         <div class="white_shd full margin_bottom_30">
-            <form method="post" action="{{route('admin-master-create-admin-submit')}}" enctype="multipart/form-data">
+            <form method="post" action="{{route('admin-master-edit-admin-submit', $admin->id)}}" enctype="multipart/form-data">
                 @csrf
                 <div class="table_section padding_infor_info">
                     <div class="mb-3">
@@ -38,7 +38,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Password</label>
-                        <input type="text" class="form-control @error('password_admin') is-invalid @enderror" name="password_admin" placeholder="Masukkan password jika ingin diubah" spellcheck="disabled" required>
+                        <input type="text" class="form-control @error('password_admin') is-invalid @enderror" name="password_admin" placeholder="Masukkan password jika ingin diubah" spellcheck="disabled">
                         @error('password_admin')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror

@@ -37,7 +37,13 @@ class MasterKelolaAkunAdminController extends Controller
 
         Admin::create($tambah_admin);
 
-        return redirect(route('admin-master-view-list-admin'))->with(['success' => 'Input data berhasil dilakukan!']);
+        return redirect(route('admin-master-view-list-admin'))->with(['toast.type' => 'success', 'toast.message' => 'Admin deleted successfully.']);
+    }
+
+    public function detailAdmin($id)
+    {
+        $admin = Admin::find($id);
+        return view('admin.kelola-admin.detailAdmin', compact('admin'));
     }
 
     public function editAdmin($id)
@@ -53,15 +59,24 @@ class MasterKelolaAkunAdminController extends Controller
         $request->validate([
             'nama_admin' => 'required|min:5',
             'username_admin' => 'required|unique:admins,username',
-            'password_admin' => 'nullable|min:6',
+            'password_admin' => 'required|min:6',
         ]);
 
         $admin->nama = $request->nama_admin;
         $admin->username = $request->username_admin;
-        $admin->password = $request->has('password_admin') ? $request->password_admin : $admin->password;
+        $admin->password = Hash::make($request->password_admin);
+        // $admin->password = $request->has('password_admin') ? $request->password_admin : $admin->password;
         $admin->role = $admin->role;
 
         $admin->save();
-        return redirect(route('admin-master-edit-admin', $admin->id))->with(['success' => 'Input data berhasil dilakukan!']);
+        return redirect(route('admin-master-edit-admin', $admin->id))->with(['toast.type' => 'success', 'toast.message' => 'Admin deleted successfully.']);
+    }
+
+    public function deleteAdmin($id)
+    {
+        $admin = Admin::find($id);
+        $admin->delete();
+        return redirect()->back()->with(['toast.type' => 'success', 'toast.message' => 'Admin deleted successfully.']);
+        // return redirect()->route('admin-master-view-list-admin')->with('error', 'Data tidak berhasil dihapus');
     }
 }

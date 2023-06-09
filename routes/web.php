@@ -67,8 +67,10 @@ Route::middleware(['throttle:60,1'])->group(function () {
     Route::middleware([Master::class])->group(function () {
         Route::get('/admin/master/list-admin', [MasterKelolaAkunAdminController::class, 'viewListAdmin'])->name('admin-master-view-list-admin');
         Route::get('/admin/master/list-admin-create', [MasterKelolaAkunAdminController::class, 'createAdmin'])->name('admin-master-create-admin');
+        Route::get('/admin/master/list-admin-detail-{id}', [MasterKelolaAkunAdminController::class, 'detailAdmin'])->name('admin-master-detail-admin');
         Route::post('/admin/master/list-admin-create-submit', [MasterKelolaAkunAdminController::class, 'createAdminSubmit'])->name('admin-master-create-admin-submit');
         Route::get('/admin/master/list-admin-edit-{id}', [MasterKelolaAkunAdminController::class, 'editAdmin'])->name('admin-master-edit-admin');
         Route::post('/admin/master/list-admin-edit-submit-{id}', [MasterKelolaAkunAdminController::class, 'editAdminSubmit'])->name('admin-master-edit-admin-submit');
+        Route::post('/admin/master/list-admin-delete-{id}', [MasterKelolaAkunAdminController::class, 'deleteAdmin'])->name('admin-master-delete');
     });
 });

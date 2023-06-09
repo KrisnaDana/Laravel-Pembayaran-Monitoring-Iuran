@@ -12,7 +12,7 @@
     </div>
 </div>
 
-<!-- <div class="row column1">
+<div class="row column1">
     <div class="col-md-6 col-lg-3">
         <div class="full counter_section margin_bottom_30 yellow_bg">
             <div class="couter_icon">
@@ -22,28 +22,21 @@
             </div>
             <div class="counter_no">
                 <div>
-                    <p class="total_no">2500</p>
-                    <p class="head_couter">Total Penerimaan</p>
+                    @php
+                    $counter = 0;
+                    foreach($admins as $admin){
+                    if($admin->role == 'Admin'){
+                    $counter++;
+                    }
+                    }
+                    @endphp
+                    <p class="total_no">{{$counter}}</p>
+                    <p class="head_couter">Total Admin</p>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-md-6 col-lg-3">
-        <div class="full counter_section margin_bottom_30 blue1_bg">
-            <div class="couter_icon">
-                <div>
-                    <i class="fa fa-sign-out"></i>
-                </div>
-            </div>
-            <div class="counter_no">
-                <div>
-                    <p class="total_no">123.50</p>
-                    <p class="head_couter">Total Pengeluaran</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
+</div>
 
 <div class="row column2 graph margin_bottom_30">
     <div class="col-md-12 col-lg-12">
@@ -78,29 +71,48 @@
                         </thead>
                         <tbody>
                             @foreach($admins as $admin)
+                            @if($admin->role == 'Admin')
                             <tr>
-                                <td>{{$loop->iteration}}</td>
+                                <td>{{$loop->iteration-1}}</td>
                                 <td>{{$admin->username}}</td>
-                                <td>{{Illuminate\Support\Str::limit($admin->password, $limit = 20, $end = '...')}}</td>
+                                <td>{{Illuminate\Support\Str::limit($admin->password, $limit = 10, $end = '...')}}</td>
                                 <td>{{$admin->role}}</td>
                                 <td>{{$admin->nama}}</td>
-                                <td class="align-middle">
-                                    <form action="" method="POST">
+                                <td class="align-middle text-center" style="width: 20%;">
+                                    <form id="deleteForm{{$admin->id}} " action=" route('admin-master-delete', $admin->id)  }}" method="POST">
                                         @csrf
-                                        <a type="button" class="btn btn-success" href="">
-                                            <i class="bi bi-box-arrow-in-down-right"></i>
-                                            <span> Detail</span>
+                                        <a type="button" class="btn btn-primary" href="{{ route('admin-master-detail-admin', $admin->id) }}">
+                                            <i class="fa fa-eye"></i>
                                         </a>
-                                        <a type="button" class="btn btn-primary" href="{{ route('admin-master-edit-admin', $admin->id) }}">
-                                            <i class="bi bi-pencil-square"></i>
-                                            <span> Edit</span>
+                                        <a type="button" class="btn btn-warning " href="{{ route('admin-master-edit-admin', $admin->id) }}">
+                                            <i class="fa fa-pencil"></i>
                                         </a>
-                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?');">
-                                            <i class="bi bi-trash3"></i>
-                                            <span> Delete</span>
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmationModal{{ $admin->id }}">
+                                            <i class="fa fa-trash"></i>
                                     </form>
                                 </td>
                             </tr>
+                            <!-- Confirmation Modal -->
+                            <div class="modal fade" id="confirmationModal{{ $admin->id }}" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel{{ $admin->id }}" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="confirmationModalLabel{{ $admin->id }}">Confirmation</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Are you sure you want to delete this item?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                            <button type="button" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('deleteForm{{ $admin->id }}').submit();">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
                             @endforeach
                         </tbody>
                     </table>
