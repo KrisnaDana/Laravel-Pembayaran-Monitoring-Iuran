@@ -65,6 +65,7 @@ Route::middleware(['throttle:60,1'])->group(function () {
     });
 
     Route::middleware([Master::class])->group(function () {
+        // Kelola Admin
         Route::get('/admin/master/list-admin', [MasterKelolaAkunAdminController::class, 'viewListAdmin'])->name('admin-master-view-list-admin');
         Route::get('/admin/master/list-admin-create', [MasterKelolaAkunAdminController::class, 'createAdmin'])->name('admin-master-create-admin');
         Route::get('/admin/master/list-admin-detail-{id}', [MasterKelolaAkunAdminController::class, 'detailAdmin'])->name('admin-master-detail-admin');
@@ -72,5 +73,12 @@ Route::middleware(['throttle:60,1'])->group(function () {
         Route::get('/admin/master/list-admin-edit-{id}', [MasterKelolaAkunAdminController::class, 'editAdmin'])->name('admin-master-edit-admin');
         Route::post('/admin/master/list-admin-edit-submit-{id}', [MasterKelolaAkunAdminController::class, 'editAdminSubmit'])->name('admin-master-edit-admin-submit');
         Route::post('/admin/master/list-admin-delete-{id}', [MasterKelolaAkunAdminController::class, 'deleteAdmin'])->name('admin-master-delete');
+
+        // Kelola User
+        Route::get('/admin/master/master-list-user', [MasterKelolaAkunAdminController::class, 'viewListUser'])->name('admin-master-view-list-user');
+        Route::get('/admin/master/master-list-user-create', [MasterKelolaAkunAdminController::class, 'createUser'])->name('admin-master-create-user');
+        Route::post('/admin/master/master-list-user-create-submit', [MasterKelolaAkunAdminController::class, 'createUserSubmit'])->name('admin-master-create-user-submit');
+        Route::get('/admin/master/master-list-user-edit-{id}', [MasterKelolaAkunAdminController::class, 'editUSer'])->name('admin-master-edit-user');
+        Route::post('/admin/master/list-admin-delete-foto-user-{id}', [MasterKelolaAkunAdminController::class, 'deleteFotoUser'])->name('admin-master-delete-foto-user');
     });
 });

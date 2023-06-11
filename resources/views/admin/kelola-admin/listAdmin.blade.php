@@ -79,7 +79,7 @@
                                 <td>{{$admin->role}}</td>
                                 <td>{{$admin->nama}}</td>
                                 <td class="align-middle text-center" style="width: 20%;">
-                                    <form id="deleteForm{{$admin->id}} " action=" route('admin-master-delete', $admin->id)  }}" method="POST">
+                                    <form id="deleteForm{{$admin->id}} " action="{{ route('admin-master-delete', $admin->id)   }}" method="POST">
                                         @csrf
                                         <a type="button" class="btn btn-primary" href="{{ route('admin-master-detail-admin', $admin->id) }}">
                                             <i class="fa fa-eye"></i>

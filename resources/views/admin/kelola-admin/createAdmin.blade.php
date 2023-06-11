@@ -38,7 +38,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Password</label>
-                        <input type="text" class="form-control @error('password_admin') is-invalid @enderror" name="password_admin" value="{{old('password_admin')}}" placeholder="Masukkan password" spellcheck="disabled" required>
+                        <input type="password" class="form-control @error('password_admin') is-invalid @enderror" name="password_admin" value="{{old('password_admin')}}" placeholder="Masukkan password" spellcheck="disabled" required>
                         @error('password_admin')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror

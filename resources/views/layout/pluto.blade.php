@@ -72,7 +72,7 @@
                                                 <li><a href="{{route('admin-master-view-list-admin')}}"> <span>Admin</span></a></li>
                                                 @endif
                                                 @if(!empty($admin))
-                                                <li><a href="#"> <span>User</span></a></li>
+                                                <li><a href="{{route('admin-master-view-list-user')}}"> <span>User</span></a></li>
                                                 @endif
                                             </ul>
                                         </li>
