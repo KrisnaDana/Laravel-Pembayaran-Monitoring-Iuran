@@ -68,12 +68,18 @@ class MasterKelolaAkunAdminController extends Controller
 
         $admin->nama = $request->nama_admin;
         $admin->username = $request->username_admin;
-        $admin->password = Hash::make($request->password_admin);
+
+        $new_password = Hash::make($request->password_admin);
+        if ($admin->password != $new_password) {
+            $admin->password = $new_password;
+        }
+
+        // $admin->password = Hash::make($request->password_admin);
         // $admin->password = $request->has('password_admin') ? $request->password_admin : $admin->password;
         $admin->role = $admin->role;
 
         $admin->save();
-        return redirect(route('admin-master-edit-admin', $admin->id))->with(['toast.type' => 'success', 'toast.message' => 'Admin deleted successfully.']);
+        return redirect(route('admin-master-edit-admin', $admin->id))->with(['toast.type' => 'success', 'toast.message' => 'Admin edited successfully.']);
     }
 
     public function deleteAdmin($id)
@@ -81,7 +87,6 @@ class MasterKelolaAkunAdminController extends Controller
         $admin = Admin::find($id);
         $admin->delete();
         return redirect()->back()->with(['toast.type' => 'success', 'toast.message' => 'Admin deleted successfully.']);
-        // return redirect()->route('admin-master-view-list-admin')->with('error', 'Data tidak berhasil dihapus');
     }
 
 
@@ -91,6 +96,12 @@ class MasterKelolaAkunAdminController extends Controller
     {
         $users = User::all();
         return view('admin.master-kelola-user.masterListUser', compact('users'));
+    }
+
+    public function detailUser($id)
+    {
+        $user = User::find($id);
+        return view('admin.master-kelola-user.masterDetailUser', compact('user'));
     }
 
     public function createUser()
@@ -138,6 +149,48 @@ class MasterKelolaAkunAdminController extends Controller
     {
         $user = User::find($id);
         return view('admin.master-kelola-user.masterEditUser', compact('user'));
+    }
+
+    public function editUserSubmit(Request $request, $id): RedirectResponse
+    {
+        $user = User::find($id);
+
+        $request->validate([
+            'username_user' => 'required|unique:users,username',
+            'password_user' => 'required|min:6',
+            'nama_user' => 'required',
+            'telepon_user' => 'required|numeric|digits_between:1,20',
+            'alamat_user' => 'required',
+            'verifikasi_user' => 'required',
+            'catatan_verifikasi_user' => 'required',
+            'status_user' => 'required',
+            'upload_foto' => 'image|file||max:4096',
+        ]);
+
+        $user->username = $request->username_user;
+        $user->nama = $request->nama_user;
+        $user->telepon = $request->telepon_user;
+        $user->alamat = $request->alamat_user;
+        $user->verifikasi = $request->verifikasi_user;
+        $user->catatan_verifikasi = $request->catatan_verifikasi_user;
+        $user->status = $request->status_user;
+
+        $new_password = Hash::make($request->password_user);
+        if ($user->password != $new_password) {
+            $user->password = $new_password;
+        }
+
+        $user->file_verifikasi = $request->has('upload_foto') ? $request->upload_foto : $user->file_verifikasi;
+
+        $user->save();
+        return redirect(route('admin-master-edit-user', $user->id))->with(['toast.type' => 'success', 'toast.message' => 'User edited successfully.']);
+    }
+
+    public function deleteUser($id)
+    {
+        $user = User::find($id);
+        $user->delete();
+        return redirect()->back()->with(['toast.type' => 'success', 'toast.message' => 'User deleted successfully.']);
     }
 
     public function deleteFotoUser($id)

@@ -62,6 +62,16 @@ Route::middleware(['throttle:60,1'])->group(function () {
         // Admin Iuran
         Route::get('/admin/iuran', [AdminIuranController::class, 'viewIuran'])->name('admin-view-iuran');
         Route::get('/admin/create-iuran', [AdminIuranController::class, 'createIuran'])->name('admin-create-iuran');
+
+        // Admin Kelola User
+        Route::get('/admin/list-user', [AdminKelolaAkunUserController::class, 'viewListUser'])->name('admin-view-list-user');
+        Route::get('/admin/list-user-detail-{id}', [AdminKelolaAkunUserController::class, 'detailUser'])->name('admin-detail-user');
+        Route::get('/admin/list-user-create', [AdminKelolaAkunUserController::class, 'createUser'])->name('admin-create-user');
+        Route::post('/admin/list-user-create-submit', [AdminKelolaAkunUserController::class, 'createUserSubmit'])->name('admin-create-user-submit');
+        Route::get('/admin/list-user-edit-{id}', [AdminKelolaAkunUserController::class, 'editUSer'])->name('admin-edit-user');
+        Route::post('/admin/list-user-edit-submit-{id}', [AdminKelolaAkunUserController::class, 'editUserSubmit'])->name('admin-edit-user-submit');
+        Route::delete('/admin/list-user-delete-foto-user-{id}', [AdminKelolaAkunUserController::class, 'deleteFotoUser'])->name('admin-delete-foto-user');
+        Route::delete('/admin/list-user-delete-{id}', [AdminKelolaAkunUserController::class, 'deleteUser'])->name('admin-delete-user');
     });
 
     Route::middleware([Master::class])->group(function () {
@@ -72,13 +82,16 @@ Route::middleware(['throttle:60,1'])->group(function () {
         Route::post('/admin/master/list-admin-create-submit', [MasterKelolaAkunAdminController::class, 'createAdminSubmit'])->name('admin-master-create-admin-submit');
         Route::get('/admin/master/list-admin-edit-{id}', [MasterKelolaAkunAdminController::class, 'editAdmin'])->name('admin-master-edit-admin');
         Route::post('/admin/master/list-admin-edit-submit-{id}', [MasterKelolaAkunAdminController::class, 'editAdminSubmit'])->name('admin-master-edit-admin-submit');
-        Route::post('/admin/master/list-admin-delete-{id}', [MasterKelolaAkunAdminController::class, 'deleteAdmin'])->name('admin-master-delete');
+        Route::delete('/admin/master/list-admin-delete-{id}', [MasterKelolaAkunAdminController::class, 'deleteAdmin'])->name('admin-master-delete-admin');
 
         // Kelola User
-        Route::get('/admin/master/master-list-user', [MasterKelolaAkunAdminController::class, 'viewListUser'])->name('admin-master-view-list-user');
-        Route::get('/admin/master/master-list-user-create', [MasterKelolaAkunAdminController::class, 'createUser'])->name('admin-master-create-user');
-        Route::post('/admin/master/master-list-user-create-submit', [MasterKelolaAkunAdminController::class, 'createUserSubmit'])->name('admin-master-create-user-submit');
-        Route::get('/admin/master/master-list-user-edit-{id}', [MasterKelolaAkunAdminController::class, 'editUSer'])->name('admin-master-edit-user');
-        Route::post('/admin/master/list-admin-delete-foto-user-{id}', [MasterKelolaAkunAdminController::class, 'deleteFotoUser'])->name('admin-master-delete-foto-user');
+        Route::get('/admin/master/list-user', [MasterKelolaAkunAdminController::class, 'viewListUser'])->name('admin-master-view-list-user');
+        Route::get('/admin/master/list-user-detail-{id}', [MasterKelolaAkunAdminController::class, 'detailUser'])->name('admin-master-detail-user');
+        Route::get('/admin/master/list-user-create', [MasterKelolaAkunAdminController::class, 'createUser'])->name('admin-master-create-user');
+        Route::post('/admin/master/list-user-create-submit', [MasterKelolaAkunAdminController::class, 'createUserSubmit'])->name('admin-master-create-user-submit');
+        Route::get('/admin/master/list-user-edit-{id}', [MasterKelolaAkunAdminController::class, 'editUSer'])->name('admin-master-edit-user');
+        Route::post('/admin/master/list-user-edit-submit-{id}', [MasterKelolaAkunAdminController::class, 'editUserSubmit'])->name('admin-master-edit-user-submit');
+        Route::delete('/admin/master/list-user-delete-foto-user-{id}', [MasterKelolaAkunAdminController::class, 'deleteFotoUser'])->name('admin-master-delete-foto-user');
+        Route::delete('/admin/master/list-user-delete-{id}', [MasterKelolaAkunAdminController::class, 'deleteUser'])->name('admin-master-delete-user');
     });
 });

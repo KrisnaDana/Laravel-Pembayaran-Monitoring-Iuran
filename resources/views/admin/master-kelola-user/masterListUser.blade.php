@@ -17,7 +17,7 @@
         <div class="full counter_section margin_bottom_30 yellow_bg">
             <div class="couter_icon">
                 <div>
-                    <i class="fa fa-sign-in"></i>
+                    <i class="fa fa-user"></i>
                 </div>
             </div>
             <div class="counter_no">
@@ -78,20 +78,43 @@
                                 <td>{{$user->verifikasi}}</td>
                                 <td>{{$user->status}}</td>
                                 <td class="align-middle text-center" style="width: 20%;">
-                                    <form id=" " action="" method="POST">
-                                        @csrf
-                                        <a type="button" class="btn btn-primary" href="">
+                                    <div class="d-flex justify-content-center">
+                                        <a type="button" class="btn btn-primary mr-2" href="{{ route('admin-master-detail-user', $user->id) }}">
                                             <i class="fa fa-eye"></i>
                                         </a>
-                                        <a type="button" class="btn btn-warning " href="{{ route('admin-master-edit-user', $user->id) }}">
+                                        <a type="button" class="btn btn-warning mr-2" href="{{ route('admin-master-edit-user', $user->id) }}">
                                             <i class="fa fa-pencil"></i>
                                         </a>
-                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="">
-                                            <i class="fa fa-trash"></i>
-                                    </form>
+                                        <form id="deleteForm{{$user->id}}" action="{{ route('admin-master-delete-user', $user->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="button" class="btn btn-danger mr-2" data-toggle="modal" data-target="#confirmationModal{{ $user->id }}">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
-
+                            <!-- Confirmation Modal -->
+                            <div class="modal fade" id="confirmationModal{{ $user->id }}" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel{{ $user->id }}" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="confirmationModalLabel{{ $user->id }}">Konfirmasi</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Apakah Anda yakin ingin menghapus data ini?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                            <button type="button" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('deleteForm{{ $user->id }}').submit();">Hapus</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             @endforeach
                         </tbody>
                     </table>

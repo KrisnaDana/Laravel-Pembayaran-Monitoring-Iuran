@@ -78,7 +78,7 @@
                                         </li>
                                         @endif
                                         @if(!empty($admin) && $admin->role == "Admin")
-                                        <li><a href="#"><i class="fa fa-wrench green_color"></i> <span>Kelola User</span></a></li>
+                                        <li><a href="{{route('admin-view-list-user')}}"><i class="fa fa-wrench green_color"></i> <span>Kelola User</span></a></li>
                                         </li>
                                         @endif
                                         @if(!empty($admin))
