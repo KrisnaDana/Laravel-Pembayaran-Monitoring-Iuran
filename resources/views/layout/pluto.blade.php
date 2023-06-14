@@ -78,7 +78,7 @@
                                 @endif
                                 @if(!empty($admin))
                                 <li><a href="#"><i class="fa fa-university yellow_color"></i> <span>Iuran</span></a></li>
-                                <li><a href="#"><i class="fa fa-fire purple_color"></i> <span>Alokasi</span></a></li>
+                                <li><a href="{{ route('admin-preview-alokasi') }}"><i class="fa fa-fire purple_color"></i> <span>Alokasi</span></a></li>
                                 <li><a href="#"><i class="fa fa-flag red_color"></i> <span>Periode</span></a></li>
                                 <li><a href="#"><i class="fa fa-calendar-o green_color"></i> <span>Pembayaran</span></a></li>
                                 @endif

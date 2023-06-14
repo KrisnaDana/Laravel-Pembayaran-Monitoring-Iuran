@@ -55,7 +55,7 @@ class AdminAlokasiController extends Controller
         }
 
         DB::table('alokasis')->insert($alokasi);
-        return redirect()->route('admin-view-alokasi', ['id' => $id]);
+        return redirect()->route('admin-view-alokasi', ['id' => $id])->with(['toast.type' => 'success', 'toast.message' => 'Alokasi created successfully.']);
     }
 
     public function deleteAlokasi($iuranId, $alokasiId)
@@ -68,10 +68,50 @@ class AdminAlokasiController extends Controller
             // Perform the delete operation
             $alokasis->delete();
             // You can add any additional logic or redirect to a specific page after deletion
-            return redirect()->back()->with('success', 'Product deleted successfully.');
+            return redirect()->back()->with(['toast.type' => 'success', 'toast.message' => 'Alokasi deleted successfully.']);
         }
 
         // If the product is not found, you can handle the appropriate response
-        return redirect()->back()->with('error', 'Product not found.');
+        return redirect()->back()->with(['toast.type' => 'error', 'toast.message' => 'Alokasi not found.']);
+    }
+
+    public function detailAlokasi($iuranId, $alokasiId)
+    {
+        $alokasis = Alokasi::find($alokasiId);
+        $iurans = Iuran::find($iuranId);
+        return view('admin.alokasi.detail', compact('alokasis', 'iurans'));
+    }
+
+    public function editAlokasi($iuranId, $alokasiId)
+    {
+        $alokasis = Alokasi::find($alokasiId);
+        $iurans = Iuran::find($iuranId);
+        return view('admin.alokasi.edit', compact('alokasis', 'iurans'));
+    }
+    
+    public function updateAlokasi(Request $request, $iuranId, $alokasiId)
+    {
+        $validated = $request->validate([
+            'alokasi_name' => 'required|string|min:1|max:100',
+            'alokasi_deskripsi' => 'required|string|min:1|max:255',
+            'alokasi_foto' => 'file|image|max:2048',
+            'alokasi_jumlah' => 'required|integer',
+            // 'alokasi_iuran' => 'required|exists:iurans,id'
+        ]);
+
+        $alokasi = Alokasi::find($alokasiId);
+        $alokasi->nama = $validated['alokasi_name'];
+        $alokasi->deskripsi = $validated['alokasi_deskripsi'];
+        $alokasi->jumlah = $validated['alokasi_jumlah'];
+
+        if ($request->hasFile('alokasi_foto')) {
+            $file = $request->file('alokasi_foto');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move('alokasi_foto', $filename);
+            $alokasi->foto = $filename;
+        }
+
+        $alokasi->save();
+        return redirect()->route('admin-view-alokasi', ['id' => $iuranId])->with(['toast.type' => 'success', 'toast.message' => 'Alokasi updated successfully.']);
     }
 }

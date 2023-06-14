@@ -66,6 +66,9 @@ Route::middleware(['throttle:60,1'])->group(function() {
         //Alokasi
         Route::get('/admin/alokasi', [AdminAlokasiController::class, 'previewIuran'])->name('admin-preview-alokasi');
         Route::get('/admin/alokasi/{id}', [AdminAlokasiController::class, 'viewAlokasi'])->name('admin-view-alokasi');
+        Route::get('/admin/detail-alokasi/{iuranId}-{alokasiId}', [AdminAlokasiController::class, 'detailAlokasi'])->name('admin-detail-alokasi');
+        Route::get('/admin/edit-alokasi/{iuranId}-{alokasiId}', [AdminAlokasiController::class, 'editAlokasi'])->name('admin-edit-alokasi');
+        Route::put('/admin/edit-alokasi/{iuranId}-{alokasiId}', [AdminAlokasiController::class, 'updateAlokasi'])->name('admin-update-alokasi');
         Route::delete('/admin/delete-alokasi/{iuranId}-{alokasiId}', [AdminAlokasiController::class, 'deleteAlokasi'])->name('admin-delete-alokasi');
         Route::get('/admin/create-alokasi/{id}', [AdminAlokasiController::class, 'createAlokasi'])->name('admin-create-alokasi');
         Route::post('/admin/create-alokasi/{id}', [AdminAlokasiController::class, 'storeAlokasi'])->name('admin-create-alokasi-store');

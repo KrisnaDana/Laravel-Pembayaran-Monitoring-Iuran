@@ -46,7 +46,7 @@
                         @if ($alokasi->iuran_id == $iurans->id )
                             <tr>
                                 <td>{{$loop->iteration}}</td>
-                                <td>{{$alokasi->nama}}</td>
+                                <td>{{$alokasi->nama}}</td> 
                                 <td>{{$alokasi->deskripsi}}</td>
                                 {{-- <td>
                                     <img src="{{ asset('alokasi_foto/' . $alokasi->foto) }}" alt="Alokasi Foto" width="200" height="200">
@@ -54,19 +54,19 @@
                                 <td>@currency($alokasi->jumlah)</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="#" class="btn btn-success mr-2">
+                                        <a href="{{ route('admin-edit-alokasi', ['iuranId' => $iurans->id, 'alokasiId' => $alokasi->id]) }}" class="btn btn-success mr-2">
                                             <i class="fas fa-pencil-alt"></i>
                                         </a>
-                                        <a href="#" class="btn btn-warning mr-2">
+                                        <a href="{{ route('admin-detail-alokasi', ['iuranId' => $iurans->id, 'alokasiId' => $alokasi->id]) }}" class="btn btn-warning mr-2">
                                             <i class="fas fa-eye"></i>
                                         </a>
-                                        <form action="{{ route('admin-delete-alokasi', ['iuranId' => $iurans->id, 'alokasiId' => $alokasi->id]) }}" method="POST">
+                                        <form id="deleteForm{{ $alokasi->id }}" action="{{ route('admin-delete-alokasi', ['iuranId' => $iurans->id, 'alokasiId' => $alokasi->id]) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger mr-2">
+                                            <button type="button" class="btn btn-danger mr-2" data-toggle="modal" data-target="#confirmationModal{{ $alokasi->id }}">
                                                 <i class="fas fa-trash"></i>
                                             </button>
-                                        </form>
+                                        </form>                                                                                
                                     </div>
                                 </td>
                             </tr>
@@ -75,6 +75,27 @@
                     </tbody>
                 </table>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Confirmation Modal -->
+<div class="modal fade" id="confirmationModal{{ $alokasi->id }}" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel{{ $alokasi->id }}" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmationModalLabel{{ $alokasi->id }}">Confirmation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this item?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('deleteForm{{ $alokasi->id }}').submit();">Delete</button>
             </div>
         </div>
     </div>
