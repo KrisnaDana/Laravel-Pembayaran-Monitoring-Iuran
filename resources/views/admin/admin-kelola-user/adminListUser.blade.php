@@ -25,7 +25,9 @@
                     @php
                     $counter = 0;
                     foreach($users as $user){
+                    if($user->verifikasi == 'Terverifikasi'){
                     $counter++;
+                    }
                     }
                     @endphp
                     <p class="total_no">{{$counter}}</p>
@@ -36,12 +38,21 @@
     </div>
 </div>
 
-<div class="row column2 graph margin_bottom_30">
-    <div class="col-md-12 col-lg-12">
-        <div class="button_block">
-            <a type="button" href="{{ route('admin-create-user') }}" class="btn cur-p btn-primary">
-                <i class="fa fa-plus">&nbsp;</i>Tambah Data User
-            </a>
+<div class="row">
+    <div class="col-md-12">
+        <div class="row column2 graph margin_bottom_30">
+            <div class="col-md-8">
+                <div class="button_block">
+                    <a type="button" href="{{ route('admin-create-user') }}" class="btn cur-p btn-primary">
+                        <i class="fa fa-plus">&nbsp;</i>Tambah Data User
+                    </a>
+                    <div class="btn-group">
+                        <a type="button" href="{{ route('admin-view-list-verifikasi-user') }}" class="btn cur-p btn-secondary">
+                            <i class="fa fa-user">&nbsp;</i>List Verifikasi
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -70,6 +81,7 @@
                         </thead>
                         <tbody>
                             @foreach($users as $user)
+                            @if($user->verifikasi == 'Terverifikasi')
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$user->nama}}</td>
@@ -115,6 +127,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @endif
                             @endforeach
                         </tbody>
                     </table>

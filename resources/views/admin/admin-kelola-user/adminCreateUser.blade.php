@@ -64,9 +64,9 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="upload_foto" class="form-label">Upload Foto KTP</label>
-                        <input class="form-control @error('upload_foto') is-invalid @enderror" type="file" id="upload_foto" name="upload_foto" required>
-                        @error('upload_foto')
+                        <label for="file_verifikasi" class="form-label">Upload File Verifikasi</label>
+                        <input class="form-control @error('file_verifikasi') is-invalid @enderror" type="file" id="file_verifikasi" name="file_verifikasi" accept=".pdf">
+                        @error('file_verifikasi')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>

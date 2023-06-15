@@ -7,7 +7,14 @@
 <div class="row column_title">
     <div class="col-md-12">
         <div class="page_title">
-            <h2>List User</h2>
+            <div class="row">
+                <div class="col" style="position: absolute; top: 50%; transform: translateY(-50%);">
+                    <h2>List Verifikasi User</h2>
+                </div>
+                <div class="col">
+                    <a href="{{ route('admin-master-view-list-user') }}"><button type="button" class="btn cur-p btn-lg btn-danger" style="float: right;">Kembali</button></a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -25,32 +32,11 @@
                     @php
                     $counter = 0;
                     foreach($users as $user){
-                    if($user->verifikasi == 'Terverifikasi'){
                     $counter++;
-                    }
                     }
                     @endphp
                     <p class="total_no">{{$counter}}</p>
-                    <p class="head_couter">Total User</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-12">
-        <div class="row column2 graph margin_bottom_30">
-            <div class="col-md-8">
-                <div class="button_block">
-                    <a type="button" href="{{ route('admin-master-create-user') }}" class="btn cur-p btn-primary">
-                        <i class="fa fa-plus">&nbsp;</i>Tambah Data User
-                    </a>
-                    <div class="btn-group">
-                        <a type="button" href="{{ route('admin-master-view-list-verifikasi-user') }}" class="btn cur-p btn-secondary">
-                            <i class="fa fa-user">&nbsp;</i>List Verifikasi
-                        </a>
-                    </div>
+                    <p class="head_couter">Total User Belum Terverifikasi</p>
                 </div>
             </div>
         </div>
@@ -81,7 +67,6 @@
                         </thead>
                         <tbody>
                             @foreach($users as $user)
-                            @if($user->verifikasi == 'Terverifikasi')
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$user->nama}}</td>
@@ -91,13 +76,13 @@
                                 <td>{{$user->status}}</td>
                                 <td class="align-middle text-center" style="width: 20%;">
                                     <div class="d-flex justify-content-center">
-                                        <a type="button" class="btn btn-primary mr-2" href="{{ route('admin-master-detail-user', $user->id) }}">
-                                            <i class="fa fa-eye"></i>
+                                        <a type="button" class="btn btn-success mr-2" href="{{ route('admin-master-detail-verifikasi-user', $user->id) }}">
+                                            <i class="fa fa-check"></i>
                                         </a>
-                                        <a type="button" class="btn btn-warning mr-2" href="{{ route('admin-master-edit-user', $user->id) }}">
+                                        <a type="button" class="btn btn-warning mr-2" href="{{ route('admin-master-edit-verifikasi-user', $user->id) }}">
                                             <i class="fa fa-pencil"></i>
                                         </a>
-                                        <form id="deleteForm{{$user->id}}" action="{{ route('admin-master-delete-user', $user->id) }}" method="POST">
+                                        <form id="deleteForm{{$user->id}}" action="{{ route('admin-master-delete-verifikasi-user', $user->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="button" class="btn btn-danger mr-2" data-toggle="modal" data-target="#confirmationModal{{ $user->id }}">
@@ -127,7 +112,6 @@
                                     </div>
                                 </div>
                             </div>
-                            @endif
                             @endforeach
                         </tbody>
                     </table>

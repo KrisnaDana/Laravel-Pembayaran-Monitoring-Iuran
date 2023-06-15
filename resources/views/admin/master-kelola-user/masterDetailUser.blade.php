@@ -83,9 +83,10 @@
                     @enderror
                 </div>
                 <div class="mt-2 mb-3">
-                    <span class="text-center">Foto KTP</span>
+                    <span class="text-center">File Verifikasi</span>
                     <div class="position-relative">
-                        <img src="{{url('images/verifikasi-users/'.$user->file_verifikasi)}}" class="rounded d-block" alt="..." style="width: 500px; max-height: 500px; margin-top: 10px;">
+                        <!-- <img src="{{url('images/verifikasi-users/'.$user->file_verifikasi)}}" class="rounded d-block" alt="..." style="width: 500px; max-height: 500px; margin-top: 10px;"> -->
+                        <iframe src="{{ url('verifikasi-user/'.$user->file_verifikasi) }}" width="50%" height="500px"></iframe>
                     </div>
                 </div>
             </div>

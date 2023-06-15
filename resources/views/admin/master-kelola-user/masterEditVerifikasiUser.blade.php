@@ -6,10 +6,10 @@
         <div class="page_title">
             <div class="row">
                 <div class="col" style="position: absolute; top: 50%; transform: translateY(-50%);">
-                    <h2>Edit Akun User</h2>
+                    <h2>Edit Verifikasi Akun User</h2>
                 </div>
                 <div class="col">
-                    <a href="{{ route('admin-master-view-list-user') }}"><button type="button" class="btn cur-p btn-lg btn-danger" style="float: right;">Kembali</button></a>
+                    <a href="{{ route('admin-master-view-list-verifikasi-user') }}"><button type="button" class="btn cur-p btn-lg btn-danger" style="float: right;">Kembali</button></a>
                     <a href=""><button type="button" class="btn cur-p btn-lg btn-primary mr-3" style="float: right;"><i class="fa fa-refresh"></i></button></a>
                 </div>
             </div>
@@ -19,7 +19,7 @@
 <div class="row">
     <div class="col">
         <div class="white_shd full margin_bottom_30">
-            <form id="editSubmit" method="post" action="{{ route('admin-master-edit-user-submit', $user->id) }}" enctype="multipart/form-data">
+            <form id="editSubmit" method="post" action="{{ route('admin-master-edit-verifikasi-user-submit', $user->id) }}" enctype="multipart/form-data">
                 @csrf
                 <div class="table_section padding_infor_info">
                     <div class="row">
@@ -74,34 +74,22 @@
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
-                </div>
-                <div class="mb-3 mt-5 text-center">
-                    <button form="editSubmit" type="submit" class="btn btn-primary">Submit</button>
-                    <button type="reset" class="btn btn-secondary">Reset</button>
+                    <div class="mb-3">
+                        <label class="form-label">Catatan Verifikasi</label>
+                        <textarea class="form-control @error('catatan_verifikasi_user') is-invalid @enderror" name="catatan_verifikasi_user" placeholder="Masukkan catatan verifikasi" rows="3" spellcheck="disabled">{{$user->catatan_verifikasi}}</textarea>
+                        @error('catatan_verifikasi_user')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
                 </div>
             </form>
         </div>
+        <div class="mb-3 mt-5 text-center">
+            <button form="editSubmit" type="submit" class="btn btn-primary">Submit</button>
+            <button type="reset" class="btn btn-secondary">Reset</button>
+        </div>
+        </form>
     </div>
 </div>
 
-<!-- Confirmation Modal -->
-<div class="modal fade" id="confirmationModal{{ $user->id }}" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel{{ $user->id }}" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="confirmationModalLabel{{ $user->id }}">Konfirmasi</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Apakah Anda yakin ingin menghapus foto ini?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                <button type="button" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('deleteFoto{{ $user->id }}').submit();">Hapus</button>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection
