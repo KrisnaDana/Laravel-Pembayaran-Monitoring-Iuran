@@ -48,7 +48,7 @@
 
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Foto</label>
-                        <input class="form-control" type="file" id="alokasi_foto" required accept="image/*" name="alokasi_foto" value="{{ old('alokasi_foto') }}">
+                        <input class="form-control" type="file" id="alokasi_foto" accept="image/*" name="alokasi_foto" value="{{ old('alokasi_foto') }}">
                         @if ($errors->has('alokasi_foto'))
                             <div class="invalid-feedback">{{ $errors->first('alokasi_foto') }}</div>
                         @endif

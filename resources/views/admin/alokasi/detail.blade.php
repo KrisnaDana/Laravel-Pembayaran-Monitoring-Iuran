@@ -33,9 +33,17 @@
         </div>
     </div>
     <div class="col">
-        <div class="white_shd full margin_bottom_30 shadow" style="width: 600px; height: 450px;">
-            <img src="{{ asset('alokasi_foto/' . $alokasis->foto) }}" alt="Alokasi Picture" class="img-fluid">
-        </div>
+        @if($alokasis->foto)
+            <div class="white_shd full margin_bottom_30 shadow" style="width: 600px; height: 450px;">
+                <img src="{{ asset('alokasi_foto/' . $alokasis->foto) }}" alt="Alokasi Picture" class="img-fluid">
+            </div>
+        @else
+            <div class="white_shd full mt-5">
+                <div class="table_section padding_infor_info">
+                    <p class="text-center">Foto tidak tersedia</p>
+                </div>
+            </div>
+        @endif
     </div>
 </div>
 

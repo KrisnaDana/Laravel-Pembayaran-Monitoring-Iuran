@@ -40,6 +40,16 @@ class AdminAlokasiController extends Controller
             // 'alokasi_iuran' => 'required|exists:iurans,id'
         ]);
 
+        $iuran = Iuran::find($id);
+
+        if (!$iuran) {
+            return redirect()->back()->with(['toast.type' => 'danger', 'toast.message' => 'Invalid iuran ID.']);
+        }
+
+        if ($validated['alokasi_jumlah'] > (int)$iuran->tersisa) {
+            return redirect()->back()->with(['toast.type' => 'danger', 'toast.message' => 'Jumlah alokasi melebihi nilai tersisa pada iuran.']);
+        }
+
         $alokasi = array(
             'nama' => $validated['alokasi_name'],
             'deskripsi' => $validated['alokasi_deskripsi'],
@@ -55,23 +65,32 @@ class AdminAlokasiController extends Controller
         }
 
         DB::table('alokasis')->insert($alokasi);
+
+        $iuran->tersisa -= $validated['alokasi_jumlah'];
+        $iuran->save();
+
         return redirect()->route('admin-view-alokasi', ['id' => $id])->with(['toast.type' => 'success', 'toast.message' => 'Alokasi created successfully.']);
     }
 
     public function deleteAlokasi($iuranId, $alokasiId)
     {
-        // Retrieve the minimarket and product based on their IDs
-        $iurans = Iuran::find($iuranId);
-        $alokasis = Alokasi::find($alokasiId);
+        $alokasi = Alokasi::find($alokasiId);
 
-        if ($alokasis) {
-            // Perform the delete operation
-            $alokasis->delete();
-            // You can add any additional logic or redirect to a specific page after deletion
-            return redirect()->back()->with(['toast.type' => 'success', 'toast.message' => 'Alokasi deleted successfully.']);
+        if (!$alokasi) {
+            return redirect()->back()->with(['toast.type' => 'error', 'toast.message' => 'Invalid alokasi ID.']);
         }
 
-        // If the product is not found, you can handle the appropriate response
+        $iuran = $alokasi->iuran;
+        $oldJumlah = $alokasi->jumlah;
+
+        $iuran->tersisa += $oldJumlah;
+        $iuran->save();
+
+        if ($alokasi) {
+            $alokasi->delete();
+            return redirect()->route('admin-view-alokasi', ['id'=>$iuranId])->with(['toast.type' => 'success', 'toast.message' => 'Alokasi deleted successfully.']);
+        }
+
         return redirect()->back()->with(['toast.type' => 'error', 'toast.message' => 'Alokasi not found.']);
     }
 
@@ -100,9 +119,26 @@ class AdminAlokasiController extends Controller
         ]);
 
         $alokasi = Alokasi::find($alokasiId);
+
+        if (!$alokasi) {
+            return redirect()->back()->with(['toast.type' => 'error', 'toast.message' => 'Invalid alokasi ID.']);
+        }
+    
+        $oldJumlah = $alokasi->jumlah;
+        $newJumlah = $validated['alokasi_jumlah'];
+
+        $iuran = $alokasi->iuran;
+        $tersisa = $iuran->tersisa + $oldJumlah;
+
+        if ($newJumlah > $tersisa) {
+            return redirect()->back()->with(['toast.type' => 'danger', 'toast.message' => 'Jumlah alokasi melebihi nilai tersisa pada iuran.']);
+        }
+
+        $iuran->tersisa = $tersisa - $newJumlah;
+
         $alokasi->nama = $validated['alokasi_name'];
         $alokasi->deskripsi = $validated['alokasi_deskripsi'];
-        $alokasi->jumlah = $validated['alokasi_jumlah'];
+        $alokasi->jumlah = $newJumlah;
 
         if ($request->hasFile('alokasi_foto')) {
             $file = $request->file('alokasi_foto');
@@ -111,6 +147,7 @@ class AdminAlokasiController extends Controller
             $alokasi->foto = $filename;
         }
 
+        $iuran->save();
         $alokasi->save();
         return redirect()->route('admin-view-alokasi', ['id' => $iuranId])->with(['toast.type' => 'success', 'toast.message' => 'Alokasi updated successfully.']);
     }
