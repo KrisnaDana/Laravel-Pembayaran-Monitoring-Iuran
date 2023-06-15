@@ -7,6 +7,7 @@ use App\Models\Iuran;
 use App\Models\Periode;
 use App\Models\Alokasi;
 use App\Models\Pembayaran;
+use App\Models\PeriodeBayar;
 use Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -17,6 +18,22 @@ class UserIuranController extends Controller
         
         $iurans = Iuran::all();
         return view('user.iuran.viewIuran', compact('iurans'));
+    }
+
+    public function previewIuran($id) {
+        // dd(Auth::guard('admin')->user()->role == 'Master');
+        $user = Auth::guard('user')->user()->id;
+        $iuran = Iuran::find($id);
+        $alokasis = Alokasi::where('iuran_id', $id)->get();
+        $periodes = Periode::where('iuran_id', $id)->get();
+        // $periodebayar = PeriodeBayar::where('user_id', $user)->get();
+        $periodebayar = DB::table('periodes')
+                        ->leftJoin('periode_bayars', 'periodes.id', '=', 'periode_bayars.periode_id')// joining the contacts table , where user_id and contact_user_id are same
+                        ->select('periodes.*', 'periode_bayars.user_id', 'periode_bayars.status')
+                        ->where('periode_bayars.user_id','=', $user)->orWhere('periode_bayars.user_id','=', null)
+                        ->get();
+        // dd($periodebayar);
+        return view('user.iuran.previewIuran', compact('iuran', 'periodes', 'alokasis','periodebayar'));
     }
 
     public function createIuran() {
@@ -170,10 +187,10 @@ class UserIuranController extends Controller
         return redirect()->route('user-view-iuran')->with('success','Berhasil menambah iuran');;
     }
 
-    public function previewIuran($id) {
-        $iuran = Iuran::find($id);
-        return view('user.iuran.previewIuran', compact('iuran'));
-    }
+    // public function previewIuran($id) {
+    //     $iuran = Iuran::find($id);
+    //     return view('user.iuran.previewIuran', compact('iuran'));
+    // }
 
     public function deleteIuran($id)
     {

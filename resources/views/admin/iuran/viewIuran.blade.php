@@ -4,20 +4,25 @@
 <div class="row column_title">
     <div class="col-md-12">
         <div class="page_title">
-            <h2>Iuran</h2>
+            <div class="row">
+                <div class="col" style="position: absolute; top: 50%; transform: translateY(-50%);">
+                    <h2>Iuran</h2>
+                </div>
+                <div class="col">
+                    <a href="{{ route('admin-create-iuran') }}"><button type="button" class="btn cur-p btn-lg btn-primary" style="float: right;">Tambah</button></a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-         
-<div class="row column2 graph margin_bottom_30">
-    <div class="col-md-12 col-lg-12">
-        <div class="button_block">
-            <a href="{{ route('admin-create-iuran') }}" type="button" class="btn cur-p btn-primary">
-                <i class="fa fa-plus">&nbsp;</i>Tambah Data Iuran
-            </a>
-        </div>
-    </div>
-</div>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb" class="bg-transparent" style="background-color:transparent;">
+        <li class="breadcrumb-item"><u class="blue1_color"><a class="blue1_color" href="{{route('admin-view-iuran')}}">Iuran</a></u></li>
+        <li class="breadcrumb-item active" aria-current="page">List Iuran</li>
+    </ol>
+</nav>         
+
 
 <div class="row column3 graph margin_bottom_30">
     <div class="col-md-l2 col-lg-12">
