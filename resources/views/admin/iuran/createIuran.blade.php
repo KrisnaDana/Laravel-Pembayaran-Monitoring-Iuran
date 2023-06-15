@@ -12,7 +12,7 @@
 </div>
 
 <div class="row column3 graph">
-    <div class="col-md-6 col-lg-6">
+    <div class="col-md-12 col-lg-12">
         <div class="white_shd full">
             <div class="full graph_head">
                 <div class="heading1 margin_0">

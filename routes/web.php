@@ -51,6 +51,15 @@ Route::middleware(['throttle:60,1'])->group(function() {
 
     Route::middleware([UserTerverifikasi::class])->group(function () {
         Route::get('/dashboard', [UserAuthController::class, 'viewDashboard'])->name('view-dashboard');
+
+        // User Iuran
+        Route::get('/user/iuran', [UserIuranController::class, 'viewIuran'])->name('user-view-iuran');
+        Route::get('/user/create-iuran', [UserIuranController::class, 'createIuran'])->name('user-create-iuran');
+        Route::post('/user/store-iuran', [UserIuranController::class, 'storeIuran'])->name('user-store-iuran');
+        Route::get('/user/edit-iuran-{id}', [UserIuranController::class, 'editIuran'])->name('user-edit-iuran');
+        Route::get('/user/preview-iuran-{id}', [UserIuranController::class, 'previewIuran'])->name('user-preview-iuran');
+        Route::post('/user/update-iuran-{id}', [UserIuranController::class, 'updateIuran'])->name('user-update-iuran');
+        Route::get('/user/delete-iuran-{id}', [UserIuranController::class, 'deleteIuran'])->name('user-delete-iuran');
     });
     
     Route::middleware([Admin::class])->group(function () {
