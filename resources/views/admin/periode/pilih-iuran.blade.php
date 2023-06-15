@@ -5,7 +5,7 @@
     <div class="col-md-12">
         <div class="page_title">
             <div class="py-2">
-                <h2>Pembayaran</h2>
+                <h2>Periode</h2>
             </div>
         </div>
     </div>
@@ -28,18 +28,18 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>No.</th>
-                                <th>Nama Iuran</th>
+                                <th class="text-center">No.</th>
+                                <th class="text-center">Nama Iuran</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($iurans as $iuran)
                             <tr>
-                                <td>{{$loop->index+1}}</td>
+                                <td class="text-center">{{$loop->index+1}}</td>
                                 <td>{{$iuran->nama}}</td>
                                 <td class="text-center">
-                                    <a href="{{route('admin-view-pembayaran', ['id' => $iuran->id])}}"><button type="button" class="btn btn-success">Pilih</button></a>
+                                    <a href="{{route('admin-view-periode', ['id' => $iuran->id])}}"><button type="button" class="btn btn-success">Pilih</button></a>
                                 </td>
                             </tr>
                             @endforeach
