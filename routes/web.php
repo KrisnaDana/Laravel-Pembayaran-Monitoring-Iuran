@@ -63,8 +63,12 @@ Route::middleware(['throttle:60,1'])->group(function() {
         Route::get('/admin/iuran', [AdminIuranController::class, 'viewIuran'])->name('admin-view-iuran');
         Route::get('/admin/create-iuran', [AdminIuranController::class, 'createIuran'])->name('admin-create-iuran');
         Route::post('/admin/store-iuran', [AdminIuranController::class, 'storeIuran'])->name('admin-store-iuran');
+        Route::get('/admin/edit-iuran-{id}', [AdminIuranController::class, 'editIuran'])->name('admin-edit-iuran');
+        Route::get('/admin/preview-iuran-{id}', [AdminIuranController::class, 'previewIuran'])->name('admin-preview-iuran');
+        Route::post('/admin/update-iuran-{id}', [AdminIuranController::class, 'updateIuran'])->name('admin-update-iuran');
+        Route::get('/admin/delete-iuran-{id}', [AdminIuranController::class, 'deleteIuran'])->name('admin-delete-iuran');
     });
-
+    
     Route::middleware([Master::class])->group(function () {
         //
     });
