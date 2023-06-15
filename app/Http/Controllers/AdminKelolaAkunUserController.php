@@ -35,7 +35,8 @@ class AdminKelolaAkunUserController extends Controller
     {
         $request->validate([
             'username_user' => 'required|unique:users,username',
-            'password_user' => 'required|min:6',
+            'password_user' => 'required|min:6|same:konfirmasi_password_user',
+            'konfirmasi_password_user' => 'required|min:6|same:password_user',
             'nama_user' => 'required',
             'telepon_user' => 'required|numeric|digits_between:1,20',
             'alamat_user' => 'required',
@@ -81,9 +82,9 @@ class AdminKelolaAkunUserController extends Controller
         $user = User::find($id);
 
         $request->validate([
-            'username_user' => 'required|unique:users,username',
-            'password_user' => 'required|min:6',
-            'nama_user' => 'required',
+            'username_user' => 'required|unique:users,username,' . $id,
+            'password_user' => 'required|min:6|same:konfirmasi_password_user',
+            'konfirmasi_password_user' => 'required|min:6|same:password_user',
             'telepon_user' => 'required|numeric|digits_between:1,20',
             'alamat_user' => 'required',
             // 'verifikasi_user' => 'required',
@@ -173,15 +174,26 @@ class AdminKelolaAkunUserController extends Controller
     {
         $user = User::find($id);
 
+        $user->catatan_verifikasi = 'File sudah benar';
+        $user->verifikasi = 'Terverifikasi';
+
+        $user->save();
+        return redirect(route('admin-view-list-verifikasi-user', $user->id))->with(['toast.type' => 'success', 'toast.message' => 'User approved successfully.']);
+    }
+
+    public function detailtVerifikasiUserRevisiSubmit(Request $request, $id): RedirectResponse
+    {
+        $user = User::find($id);
+
         $request->validate([
             'catatan_verifikasi_user' => 'required',
         ]);
 
         $user->catatan_verifikasi = $request->catatan_verifikasi_user;
-        $user->verifikasi = 'Terverifikasi';
+        $user->verifikasi = 'Perbaikan verifikasi';
 
         $user->save();
-        return redirect(route('admin-view-list-verifikasi-user', $user->id))->with(['toast.type' => 'success', 'toast.message' => 'User approved successfully.']);
+        return redirect(route('admin-view-list-verifikasi-user', $user->id))->with(['toast.type' => 'success', 'toast.message' => 'Users need to make revisions.']);
     }
 
     public function editVerifikasiUser($id)
@@ -195,8 +207,9 @@ class AdminKelolaAkunUserController extends Controller
         $user = User::find($id);
 
         $request->validate([
-            'username_user' => 'required',
-            'password_user' => 'required|min:6',
+            'username_user' => 'required|unique:users,username,' . $id,
+            'password_user' => 'required|min:6|same:konfirmasi_password_user',
+            'konfirmasi_password_user' => 'required|min:6|same:password_user',
             'nama_user' => 'required',
             'telepon_user' => 'required|numeric|digits_between:1,20',
             'alamat_user' => 'required',
@@ -206,14 +219,11 @@ class AdminKelolaAkunUserController extends Controller
             // 'upload_foto' => 'image|file||max:4096',
         ]);
 
-        if ($request->username_user != $user->username) {
-            $user->username = $request->username_user;
-        }
-
+        $user->username = $request->username_user;
         $user->nama = $request->nama_user;
         $user->telepon = $request->telepon_user;
         $user->alamat = $request->alamat_user;
-        // $user->verifikasi = $request->verifikasi_user;
+        // $user->verifikasi = 'Perbaikan verifikasi';
         // $user->catatan_verifikasi = $request->catatan_verifikasi_user;
         $user->status = $request->status_user;
 

@@ -22,21 +22,28 @@
             <form id="editSubmit" method="post" action="{{ route('admin-master-edit-user-submit', $user->id) }}" enctype="multipart/form-data">
                 @csrf
                 <div class="table_section padding_infor_info">
+                    <div class="mb-3">
+                        <label class="form-label">Username</label>
+                        <input type="text" class="form-control @error('username_user') is-invalid @enderror" name="username_user" value="{{$user->username}}" placeholder="Masukkan username" spellcheck="disabled" required>
+                        @error('username_user')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
                     <div class="row">
                         <div class="col">
                             <div class="mb-3">
-                                <label class="form-label">Username</label>
-                                <input type="text" class="form-control @error('username_user') is-invalid @enderror" name="username_user" value="{{$user->username}}" placeholder="Masukkan username" spellcheck="disabled" required>
-                                @error('username_user')
+                                <label class="form-label">Password</label>
+                                <input type="password" class="form-control @error('password_user') is-invalid @enderror" name="password_user" value="{{$user->password}}" placeholder="Masukkan password" spellcheck="disabled" required>
+                                @error('password_user')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                         </div>
                         <div class="col">
                             <div class="mb-3">
-                                <label class="form-label">Password</label>
-                                <input type="password" class="form-control @error('password_user') is-invalid @enderror" name="password_user" value="{{$user->password}}" placeholder="Masukkan password" spellcheck="disabled" required>
-                                @error('password_user')
+                                <label class="form-label">Konfirmasi Password</label>
+                                <input type="password" class="form-control @error('konfirmasi_password_user') is-invalid @enderror" name="konfirmasi_password_user" value="{{$user->password}}" placeholder="Masukkan password" spellcheck="disabled" required>
+                                @error('konfirmasi_password_user')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
@@ -84,24 +91,4 @@
     </div>
 </div>
 
-<!-- Confirmation Modal -->
-<div class="modal fade" id="confirmationModal{{ $user->id }}" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel{{ $user->id }}" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="confirmationModalLabel{{ $user->id }}">Konfirmasi</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Apakah Anda yakin ingin menghapus foto ini?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                <button type="button" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('deleteFoto{{ $user->id }}').submit();">Hapus</button>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection

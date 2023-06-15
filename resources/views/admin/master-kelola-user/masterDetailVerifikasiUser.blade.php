@@ -21,6 +21,9 @@
         <div class="white_shd full margin_bottom_30">
             <form id="detailSubmit" method="post" action="{{ route('admin-master-detail-verifikasi-user-submit', $user->id) }}" enctype="multipart/form-data">
                 @csrf
+            </form>
+            <form id="detailRevisiSubmit" method="post" action="{{ route('admin-master-detail-verifikasi-user-revisi-submit', $user->id) }}" enctype="multipart/form-data">
+                @csrf
                 <div class="table_section padding_infor_info">
                     <div class="mb-3">
                         <label class="form-label">Username</label>
@@ -66,7 +69,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Catatan Verifikasi</label>
-                        <textarea class="form-control @error('catatan_verifikasi_user') is-invalid @enderror" name="catatan_verifikasi_user" placeholder="Masukkan catatan verifikasi" rows="3" spellcheck="disabled" required>{{$user->catatan_verifikasi}}</textarea>
+                        <textarea class="form-control @error('catatan_verifikasi_user') is-invalid @enderror" name="catatan_verifikasi_user" placeholder="Masukkan catatan verifikasi" rows="3" spellcheck="disabled">{{$user->catatan_verifikasi}}</textarea>
                         @error('catatan_verifikasi_user')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
@@ -78,12 +81,13 @@
                             <iframe src="{{ url('verifikasi-user/'.$user->file_verifikasi) }}" width="50%" height="500px"></iframe>
                         </div>
                     </div>
+                    <div class="mb-3 mt-5 text-center">
+                        <button form="detailSubmit" type="submit" class="btn btn-success">Approve</button>
+                        <button form="detailRevisiSubmit" type="submit" class="btn btn-warning">Revision</button>
+                        <!-- <button type="reset" class="btn btn-secondary">Reset</button> -->
+                    </div>
                 </div>
             </form>
-        </div>
-        <div class="mb-3 mt-5 text-center">
-            <button form="detailSubmit" type="submit" class="btn btn-success">Approve</button>
-            <button type="reset" class="btn btn-secondary">Reset</button>
         </div>
     </div>
 </div>

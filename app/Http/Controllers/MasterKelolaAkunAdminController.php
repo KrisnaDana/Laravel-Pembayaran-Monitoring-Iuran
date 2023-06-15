@@ -32,7 +32,8 @@ class MasterKelolaAkunAdminController extends Controller
         $request->validate([
             'nama_admin' => 'required|min:5',
             'username_admin' => 'required|unique:admins,username',
-            'password_admin' => 'required|min:6',
+            'password_admin' => 'required|min:6|same:konfirmasi_password_admin',
+            'konfirmasi_password_admin' => 'required|min:6|same:password_admin',
         ]);
 
         $tambah_admin = array(
@@ -65,8 +66,9 @@ class MasterKelolaAkunAdminController extends Controller
 
         $request->validate([
             'nama_admin' => 'required|min:5',
-            'username_admin' => 'required|unique:admins,username',
-            'password_admin' => 'required|min:6',
+            'username_admin' => 'required|unique:admins,username,' . $id,
+            'password_admin' => 'required|min:6|same:konfirmasi_password_admin',
+            'konfirmasi_password_admin' => 'required|min:6|same:password_admin',
         ]);
 
         $admin->nama = $request->nama_admin;
@@ -155,7 +157,8 @@ class MasterKelolaAkunAdminController extends Controller
     {
         $request->validate([
             'username_user' => 'required|unique:users,username',
-            'password_user' => 'required|min:6',
+            'password_user' => 'required|min:6|same:konfirmasi_password_user',
+            'konfirmasi_password_user' => 'required|min:6|same:password_user',
             'nama_user' => 'required',
             'telepon_user' => 'required|numeric|digits_between:1,20',
             'alamat_user' => 'required',
@@ -201,8 +204,9 @@ class MasterKelolaAkunAdminController extends Controller
         $user = User::find($id);
 
         $request->validate([
-            'username_user' => 'required|unique:users,username',
-            'password_user' => 'required|min:6',
+            'username_user' => 'required|unique:users,username,' . $id,
+            'password_user' => 'required|min:6|same:konfirmasi_password_user',
+            'konfirmasi_password_user' => 'required|min:6|same:password_user',
             'nama_user' => 'required',
             'telepon_user' => 'required|numeric|digits_between:1,20',
             'alamat_user' => 'required',
@@ -273,15 +277,26 @@ class MasterKelolaAkunAdminController extends Controller
     {
         $user = User::find($id);
 
+        $user->catatan_verifikasi = 'File sudah benar';
+        $user->verifikasi = 'Terverifikasi';
+
+        $user->save();
+        return redirect(route('admin-master-view-list-verifikasi-user', $user->id))->with(['toast.type' => 'success', 'toast.message' => 'User approved successfully.']);
+    }
+
+    public function detailtVerifikasiUserRevisiSubmit(Request $request, $id): RedirectResponse
+    {
+        $user = User::find($id);
+
         $request->validate([
             'catatan_verifikasi_user' => 'required',
         ]);
 
         $user->catatan_verifikasi = $request->catatan_verifikasi_user;
-        $user->verifikasi = 'Terverifikasi';
+        $user->verifikasi = 'Perbaikan verifikasi';
 
         $user->save();
-        return redirect(route('admin-master-view-list-verifikasi-user', $user->id))->with(['toast.type' => 'success', 'toast.message' => 'User approved successfully.']);
+        return redirect(route('admin-master-view-list-verifikasi-user', $user->id))->with(['toast.type' => 'success', 'toast.message' => 'Users need to make revisions.']);
     }
 
     public function editVerifikasiUser($id)
@@ -295,8 +310,9 @@ class MasterKelolaAkunAdminController extends Controller
         $user = User::find($id);
 
         $request->validate([
-            'username_user' => 'required',
-            'password_user' => 'required|min:6',
+            'username_user' => 'required|unique:users,username,' . $id,
+            'password_user' => 'required|min:6|same:konfirmasi_password_user',
+            'konfirmasi_password_user' => 'required|min:6|same:password_user',
             'nama_user' => 'required',
             'telepon_user' => 'required|numeric|digits_between:1,20',
             'alamat_user' => 'required',
@@ -306,14 +322,11 @@ class MasterKelolaAkunAdminController extends Controller
             // 'upload_foto' => 'image|file||max:4096',
         ]);
 
-        if ($request->username_user != $user->username) {
-            $user->username = $request->username_user;
-        }
-
+        $user->username = $request->username_user;
         $user->nama = $request->nama_user;
         $user->telepon = $request->telepon_user;
         $user->alamat = $request->alamat_user;
-        // $user->verifikasi = $request->verifikasi_user;
+        // $user->verifikasi = 'Perbaikan verifikasi';
         // $user->catatan_verifikasi = $request->catatan_verifikasi_user;
         $user->status = $request->status_user;
 

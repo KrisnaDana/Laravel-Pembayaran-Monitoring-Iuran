@@ -63,7 +63,7 @@
                             <tr>
                                 <th>No.</th>
                                 <th>Username</th>
-                                <th>Password</th>
+                                <!-- <th>Password</th> -->
                                 <th>Role</th>
                                 <th>Nama</th>
                                 <th>Action</th>
@@ -75,7 +75,7 @@
                             <tr>
                                 <td>{{$loop->iteration-1}}</td>
                                 <td>{{$admin->username}}</td>
-                                <td>{{Illuminate\Support\Str::limit($admin->password, $limit = 10, $end = '...')}}</td>
+                                <!-- <td>{{Illuminate\Support\Str::limit($admin->password, $limit = 10, $end = '...')}}</td> -->
                                 <td>{{$admin->role}}</td>
                                 <td>{{$admin->nama}}</td>
                                 <td class="align-middle text-center" style="width: 20%;">

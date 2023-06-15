@@ -77,6 +77,7 @@ Route::middleware(['throttle:60,1'])->group(function () {
         Route::get('/admin/list-verifikasi-user', [AdminKelolaAkunUserController::class, 'viewListUserVerifikasi'])->name('admin-view-list-verifikasi-user');
         Route::get('/admin/list-verifikasi-user-detail-{id}', [AdminKelolaAkunUserController::class, 'detailVerifikasiUser'])->name('admin-detail-verifikasi-user');
         Route::post('/admin/list-verifikasi-user-detail-submit-{id}', [AdminKelolaAkunUserController::class, 'detailtVerifikasiUserSubmit'])->name('admin-detail-verifikasi-user-submit');
+        Route::post('/admin/list-verifikasi-user-detail-revisi-submit-{id}', [AdminKelolaAkunUserController::class, 'detailtVerifikasiUserRevisiSubmit'])->name('admin-detail-verifikasi-user-revisi-submit');
         Route::get('/admin/list-verifikasi-user-edit-{id}', [AdminKelolaAkunUserController::class, 'editVerifikasiUser'])->name('admin-edit-verifikasi-user');
         Route::post('/admin/list-verifikasi-user-edit-submit-{id}', [AdminKelolaAkunUserController::class, 'editVerifikasiUserSubmit'])->name('admin-edit-verifikasi-user-submit');
         Route::delete('/admin/list-verifikasi-user-delete-{id}', [AdminKelolaAkunUserController::class, 'deleteVerifikasiUser'])->name('admin-delete-verifikasi-user');
@@ -106,6 +107,7 @@ Route::middleware(['throttle:60,1'])->group(function () {
         Route::get('/admin/master/list-verifikasi-user', [MasterKelolaAkunAdminController::class, 'viewListUserVerifikasi'])->name('admin-master-view-list-verifikasi-user');
         Route::get('/admin/master/list-verifikasi-user-detail-{id}', [MasterKelolaAkunAdminController::class, 'detailVerifikasiUser'])->name('admin-master-detail-verifikasi-user');
         Route::post('/admin/master/list-verifikasi-user-detail-submit-{id}', [MasterKelolaAkunAdminController::class, 'detailtVerifikasiUserSubmit'])->name('admin-master-detail-verifikasi-user-submit');
+        Route::post('/admin/master/list-verifikasi-user-detail-revisi-submit-{id}', [MasterKelolaAkunAdminController::class, 'detailtVerifikasiUserRevisiSubmit'])->name('admin-master-detail-verifikasi-user-revisi-submit');
         Route::get('/admin/master/list-verifikasi-user-edit-{id}', [MasterKelolaAkunAdminController::class, 'editVerifikasiUser'])->name('admin-master-edit-verifikasi-user');
         Route::post('/admin/master/list-verifikasi-user-edit-submit-{id}', [MasterKelolaAkunAdminController::class, 'editVerifikasiUserSubmit'])->name('admin-master-edit-verifikasi-user-submit');
         Route::delete('/admin/master/list-verifikasi-user-delete-{id}', [MasterKelolaAkunAdminController::class, 'deleteVerifikasiUser'])->name('admin-master-delete-verifikasi-user');

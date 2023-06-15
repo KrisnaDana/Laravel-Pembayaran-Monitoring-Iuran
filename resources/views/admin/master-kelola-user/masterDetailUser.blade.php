@@ -77,7 +77,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Catatan Verifikasi</label>
-                    <textarea class="form-control @error('catatan_verifikasi_user') is-invalid @enderror" name="catatan_verifikasi_user" placeholder="Masukkan catatan verifikasi" rows="3" spellcheck="disabled" required readonly>{{$user->catatan_verifikasi}}</textarea>
+                    <textarea class="form-control @error('catatan_verifikasi_user') is-invalid @enderror" name="catatan_verifikasi_user" placeholder="" rows="3" spellcheck="disabled" required readonly>{{$user->catatan_verifikasi}}</textarea>
                     @error('catatan_verifikasi_user')
                     <div class="invalid-feedback">{{$message}}</div>
                     @enderror

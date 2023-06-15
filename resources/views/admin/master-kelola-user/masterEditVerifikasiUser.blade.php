@@ -22,20 +22,27 @@
             <form id="editSubmit" method="post" action="{{ route('admin-master-edit-verifikasi-user-submit', $user->id) }}" enctype="multipart/form-data">
                 @csrf
                 <div class="table_section padding_infor_info">
+                    <div class="mb-3">
+                        <label class="form-label">Username</label>
+                        <input type="text" class="form-control @error('username_user') is-invalid @enderror" name="username_user" value="{{$user->username}}" placeholder="Masukkan username" spellcheck="disabled" required>
+                        @error('username_user')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
                     <div class="row">
                         <div class="col">
                             <div class="mb-3">
-                                <label class="form-label">Username</label>
-                                <input type="text" class="form-control @error('username_user') is-invalid @enderror" name="username_user" value="{{$user->username}}" placeholder="Masukkan username" spellcheck="disabled" required>
-                                @error('username_user')
+                                <label class="form-label">Password</label>
+                                <input type="password" class="form-control @error('password_user') is-invalid @enderror" name="password_user" value="{{$user->password}}" placeholder="Masukkan password" spellcheck="disabled" required>
+                                @error('password_user')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                         </div>
                         <div class="col">
                             <div class="mb-3">
-                                <label class="form-label">Password</label>
-                                <input type="password" class="form-control @error('password_user') is-invalid @enderror" name="password_user" value="{{$user->password}}" placeholder="Masukkan password" spellcheck="disabled" required>
+                                <label class="form-label">Konfirmasi Password</label>
+                                <input type="password" class="form-control @error('konfirmasi_password_user') is-invalid @enderror" name="konfirmasi_password_user" value="{{$user->password}}" placeholder="Masukkan password" spellcheck="disabled" required>
                                 @error('password_user')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
@@ -82,13 +89,12 @@
                         @enderror
                     </div>
                 </div>
+                <div class="mb-5 text-center">
+                    <button form="editSubmit" type="submit" class="btn btn-primary">Submit</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                </div>
             </form>
         </div>
-        <div class="mb-3 mt-5 text-center">
-            <button form="editSubmit" type="submit" class="btn btn-primary">Submit</button>
-            <button type="reset" class="btn btn-secondary">Reset</button>
-        </div>
-        </form>
     </div>
 </div>
 
