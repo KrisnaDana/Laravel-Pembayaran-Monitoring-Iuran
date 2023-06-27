@@ -25,12 +25,14 @@
             </div>
             <div class="table_section padding_infor_info ">
                 <div class="table-responsive-sm">
-                <table class="table table-bordered">
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <th>No.</th>
                             <th>Nama</th>
                             <th>Deskripsi</th>
+                            <th>Dana Terkumpul</th>
+                            <th>Dana Tersisa</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -40,6 +42,8 @@
                             <td>{{$loop->iteration}}</td>
                             <td>{{$iuran->nama}}</td>
                             <td>{{$iuran->deskripsi}}</td>
+                            <td>Rp. {{$iuran->terkumpul}}</td>
+                            <td>Rp. {{$iuran->tersisa}}</td>
                             <td>
                                 <a href="{{ route('admin-view-alokasi', ['id' => $iuran->id]) }}" class="btn btn-success">Pilih</a>
                             </td>
