@@ -12,12 +12,13 @@ use Illuminate\Support\Facades\DB;
 
 class AdminIuranController extends Controller
 {
+
     public function viewIuran() {
         // dd(Auth::guard('admin')->user()->role == 'Master');
-        
         $iurans = Iuran::all();
         return view('admin.iuran.viewIuran', compact('iurans'));
     }
+
 
     public function createIuran() {
         return view('admin.iuran.createIuran');
