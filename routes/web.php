@@ -71,11 +71,34 @@ Route::middleware(['throttle:60,1'])->group(function() {
         // Admin Iuran
         Route::get('/admin/iuran', [AdminIuranController::class, 'viewIuran'])->name('admin-view-iuran');
         Route::get('/admin/create-iuran', [AdminIuranController::class, 'createIuran'])->name('admin-create-iuran');
+
         Route::post('/admin/store-iuran', [AdminIuranController::class, 'storeIuran'])->name('admin-store-iuran');
         Route::get('/admin/edit-iuran-{id}', [AdminIuranController::class, 'editIuran'])->name('admin-edit-iuran');
         Route::get('/admin/preview-iuran-{id}', [AdminIuranController::class, 'previewIuran'])->name('admin-preview-iuran');
         Route::post('/admin/update-iuran-{id}', [AdminIuranController::class, 'updateIuran'])->name('admin-update-iuran');
         Route::get('/admin/delete-iuran-{id}', [AdminIuranController::class, 'deleteIuran'])->name('admin-delete-iuran');
+
+        // Pembayaran
+        Route::get('/admin/pembayaran-pilih-iuran', [AdminPembayaranController::class, 'pilihIuran'])->name('admin-view-pembayaran-pilih-iuran');
+        Route::get('/admin/pembayaran/{id}', [AdminPembayaranController::class, 'index'])->name('admin-view-pembayaran');
+        Route::get('/admin/read-pembayaran/{id}-{pembayaran_id}', [AdminPembayaranController::class, 'read'])->name('admin-read-pembayaran');
+        Route::get('/admin/create-pembayaran/{id}', [AdminPembayaranController::class, 'viewCreate'])->name('admin-view-create-pembayaran');
+        Route::post('/admin/create-pembayaran/{id}', [AdminPembayaranController::class, 'create'])->name('admin-create-pembayaran');
+        Route::get('/admin/edit-pembayaran/{id}-{pembayaran_id}', [AdminPembayaranController::class, 'viewEdit'])->name('admin-view-edit-pembayaran');
+        Route::post('/admin/edit-pembayaran/{id}-{pembayaran_id}', [AdminPembayaranController::class, 'edit'])->name('admin-edit-pembayaran');
+        Route::post('/admin/delete-pembayaran/{id}-{pembayaran_id}', [AdminPembayaranController::class, 'delete'])->name('admin-delete-pembayaran');
+        Route::get('/admin/konfirmasi-pembayaran/{id}-{pembayaran_id}', [AdminPembayaranController::class, 'viewKonfirmasi'])->name('admin-view-konfirmasi-pembayaran');
+        Route::post('/admin/konfirmasi-pembayaran/{id}-{pembayaran_id}', [AdminPembayaranController::class, 'konfirmasi'])->name('admin-konfirmasi-pembayaran');
+
+        // Periode
+        Route::get('/admin/periode-pilih-iuran', [AdminPeriodeController::class, 'pilihIuran'])->name('admin-view-periode-pilih-iuran');
+        Route::get('/admin/periode/{id}', [AdminPeriodeController::class, 'index'])->name('admin-view-periode');
+        Route::get('/admin/read-periode/{id}-{periode_id}', [AdminPeriodeController::class, 'read'])->name('admin-read-periode');
+        Route::get('/admin/create-periode/{id}', [AdminPeriodeController::class, 'viewCreate'])->name('admin-view-create-periode');
+        Route::post('/admin/create-periode/{id}', [AdminPeriodeController::class, 'create'])->name('admin-create-periode');
+        Route::get('/admin/edit-periode/{id}-{periode_id}', [AdminPeriodeController::class, 'viewEdit'])->name('admin-view-edit-periode');
+        Route::post('/admin/edit-periode/{id}-{periode_id}', [AdminPeriodeController::class, 'edit'])->name('admin-edit-periode');
+        Route::post('/admin/delete-periode/{id}-{periode_id}', [AdminPeriodeController::class, 'delete'])->name('admin-delete-periode');
     });
     
     Route::middleware([Master::class])->group(function () {
