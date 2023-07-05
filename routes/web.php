@@ -51,6 +51,15 @@ Route::middleware(['throttle:60,1'])->group(function() {
 
     Route::middleware([UserTerverifikasi::class])->group(function () {
         Route::get('/dashboard', [UserAuthController::class, 'viewDashboard'])->name('view-dashboard');
+
+        // User Iuran
+        Route::get('/user/iuran', [UserIuranController::class, 'viewIuran'])->name('user-view-iuran');
+        Route::get('/user/create-iuran', [UserIuranController::class, 'createIuran'])->name('user-create-iuran');
+        Route::post('/user/store-iuran', [UserIuranController::class, 'storeIuran'])->name('user-store-iuran');
+        Route::get('/user/edit-iuran-{id}', [UserIuranController::class, 'editIuran'])->name('user-edit-iuran');
+        Route::get('/user/preview-iuran-{id}', [UserIuranController::class, 'previewIuran'])->name('user-preview-iuran');
+        Route::post('/user/update-iuran-{id}', [UserIuranController::class, 'updateIuran'])->name('user-update-iuran');
+        Route::get('/user/delete-iuran-{id}', [UserIuranController::class, 'deleteIuran'])->name('user-delete-iuran');
     });
     
     Route::middleware([Admin::class])->group(function () {
@@ -62,6 +71,12 @@ Route::middleware(['throttle:60,1'])->group(function() {
         // Admin Iuran
         Route::get('/admin/iuran', [AdminIuranController::class, 'viewIuran'])->name('admin-view-iuran');
         Route::get('/admin/create-iuran', [AdminIuranController::class, 'createIuran'])->name('admin-create-iuran');
+
+        Route::post('/admin/store-iuran', [AdminIuranController::class, 'storeIuran'])->name('admin-store-iuran');
+        Route::get('/admin/edit-iuran-{id}', [AdminIuranController::class, 'editIuran'])->name('admin-edit-iuran');
+        Route::get('/admin/preview-iuran-{id}', [AdminIuranController::class, 'previewIuran'])->name('admin-preview-iuran');
+        Route::post('/admin/update-iuran-{id}', [AdminIuranController::class, 'updateIuran'])->name('admin-update-iuran');
+        Route::get('/admin/delete-iuran-{id}', [AdminIuranController::class, 'deleteIuran'])->name('admin-delete-iuran');
 
         // Pembayaran
         Route::get('/admin/pembayaran-pilih-iuran', [AdminPembayaranController::class, 'pilihIuran'])->name('admin-view-pembayaran-pilih-iuran');
@@ -85,7 +100,7 @@ Route::middleware(['throttle:60,1'])->group(function() {
         Route::post('/admin/edit-periode/{id}-{periode_id}', [AdminPeriodeController::class, 'edit'])->name('admin-edit-periode');
         Route::post('/admin/delete-periode/{id}-{periode_id}', [AdminPeriodeController::class, 'delete'])->name('admin-delete-periode');
     });
-
+    
     Route::middleware([Master::class])->group(function () {
         //
     });
