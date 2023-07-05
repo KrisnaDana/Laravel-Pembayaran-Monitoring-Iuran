@@ -9,7 +9,7 @@
                     <h2>Pembayaran</h2>
                 </div>
                 <div class="col">
-                    <a href="#"><button type="button" class="btn cur-p btn-lg btn-primary mr-3" style="float: right;">Tambah</button></a>
+                    <a href="{{route('admin-create-pembayaran', ['id' => $iuran_id])}}"><button type="button" class="btn cur-p btn-lg btn-primary mr-3" style="float: right;">Tambah</button></a>
                 </div>
             </div>
         </div>
@@ -52,10 +52,8 @@
                                 <td>{{$pembayaran->status}}</td>
                                 <td class="text-center">
                                     <a href="{{route('admin-read-pembayaran', ['id' => $iuran_id, 'pembayaran_id' => $pembayaran->id])}}"><button type="button" class="btn btn-primary"><i class="fa fa-book text-white"></i></button></a>
+                                    @if(!($pembayaran->status == "Terverifikasi" || $pembayaran->status == "Dibatalkan"))
                                     <a href="{{route('admin-view-konfirmasi-pembayaran', ['id' => $iuran_id, 'pembayaran_id' => $pembayaran->id])}}"><button type="button" class="btn btn-success"><i class="fa fa-check text-white"></i></button></a>
-                                    @if($master)
-                                    <a href="{{route('admin-view-edit-pembayaran', ['id' => $iuran_id, 'pembayaran_id' => $pembayaran->id])}}"><button type="button" class="btn btn-warning"><i class="fa fa-pencil-square text-white"></i></button></a>
-                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-modal{{$loop->index+1}}"><i class="fa fa-trash-o text-white"></i></button>
                                     @endif
                                 </td>
                             </tr>

@@ -75,6 +75,15 @@ class AdminPeriodeController extends Controller
             'mulai' => 'required|date_format:Y-m-d|before_or_equal:berakhir',
             'berakhir' => 'required|date_format:Y-m-d|after_or_equal:mulai'
         ]);
+        $periode_bayars = PeriodeBayar::where('periode_id', $periode_id)->get();
+        $check = 0;
+        foreach($periode_bayars as $periode_bayar){
+            $check = 1;
+            break;
+        }
+        if($check == 1){
+            return redirect()->back()->with(['toast.type' => 'danger', 'toast.message' => 'Edit periode tidak diperbolehkan.']);
+        }
         $periodes = Periode::where('iuran_id', $id)->get();
         foreach($periodes as $periode){
             if($periode->id == $periode_id){
@@ -94,7 +103,7 @@ class AdminPeriodeController extends Controller
         $periode->mulai = $validated['mulai'];
         $periode->akhir = $validated['berakhir'];
         $periode->save();
-        return redirect()->back()->with(['toast.type' => 'success', 'toast.message' => 'Periode berhasil dibuat.']);
+        return redirect()->back()->with(['toast.type' => 'success', 'toast.message' => 'Periode berhasil diedit.']);
     }
     
     public function delete($id, $periode_id): RedirectResponse {

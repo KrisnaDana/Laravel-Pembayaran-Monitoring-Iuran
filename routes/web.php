@@ -67,8 +67,8 @@ Route::middleware(['throttle:60,1'])->group(function() {
         Route::get('/admin/pembayaran-pilih-iuran', [AdminPembayaranController::class, 'pilihIuran'])->name('admin-view-pembayaran-pilih-iuran');
         Route::get('/admin/pembayaran/{id}', [AdminPembayaranController::class, 'index'])->name('admin-view-pembayaran');
         Route::get('/admin/read-pembayaran/{id}-{pembayaran_id}', [AdminPembayaranController::class, 'read'])->name('admin-read-pembayaran');
-        Route::get('/admin/create-pembayaran/{id}-{pembayaran_id}', [AdminPembayaranController::class, 'viewCreate'])->name('admin-view-create-pembayaran');
-        Route::post('/admin/create-pembayaran/{id}-{pembayaran_id}', [AdminPembayaranController::class, 'create'])->name('admin-create-pembayaran');
+        Route::get('/admin/create-pembayaran/{id}', [AdminPembayaranController::class, 'viewCreate'])->name('admin-view-create-pembayaran');
+        Route::post('/admin/create-pembayaran/{id}', [AdminPembayaranController::class, 'create'])->name('admin-create-pembayaran');
         Route::get('/admin/edit-pembayaran/{id}-{pembayaran_id}', [AdminPembayaranController::class, 'viewEdit'])->name('admin-view-edit-pembayaran');
         Route::post('/admin/edit-pembayaran/{id}-{pembayaran_id}', [AdminPembayaranController::class, 'edit'])->name('admin-edit-pembayaran');
         Route::post('/admin/delete-pembayaran/{id}-{pembayaran_id}', [AdminPembayaranController::class, 'delete'])->name('admin-delete-pembayaran');

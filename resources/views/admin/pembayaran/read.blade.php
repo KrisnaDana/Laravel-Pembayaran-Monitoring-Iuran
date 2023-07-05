@@ -52,7 +52,7 @@
                     <div class="col">
                         <div class="mb-3">
                             <label class="form-label">Tanggal :</label>
-                            <input autocomplete="off" type="date" class="form-control" name="berakhir" id="berakhir" spellcheck="disabled" value="{{$pembayaran->created_at}}" readonly>
+                            <input autocomplete="off" type="date" class="form-control" name="berakhir" id="berakhir" spellcheck="disabled" value="{{$pembayaran->tanggal}}" readonly>
                         </div>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                 @if(!empty($pembayaran->bukti_transfer))
                 <div class="mb-3">
                     <label class="form-label">Bukti Transfer :</label>
-                    <iframe src="{{ url('bukti-transfer-user/'.$pembayaran->bukti_transfer) }}" width="500px"></iframe>
+                    <img src="{{ url('bukti-transfer-user/'.$pembayaran->bukti_transfer) }}" width="500px"></img>
                 </div>
                 @endif
             </div>
