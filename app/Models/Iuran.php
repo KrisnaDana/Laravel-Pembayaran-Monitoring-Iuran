@@ -16,6 +16,10 @@ class Iuran extends Model
         return $this->hasMany(Alokasi::class);
     }
 
+    public function periodes(): HasMany {
+        return $this->hasMany(Periode::class);
+    }
+
     public function Pembayaran(): HasMany {
         return $this->hasMany(Pembayaran::class);
     }
