@@ -21,9 +21,6 @@ return new class extends Migration
             $table->unsignedBigInteger('tersisa');
             // $table->date('terakhir');
             $table->enum('status', ['Buka', 'Tutup']);
-            $table->enum('jenis', ['Sekali', 'Periodik']);
-            $table->date('mulai');
-            $table->date('akhir')->nullable();
             $table->integer('jarak_periode')->nullable(); // dalam hari
             $table->string('gambar')->nullable();
             $table->timestamps();
