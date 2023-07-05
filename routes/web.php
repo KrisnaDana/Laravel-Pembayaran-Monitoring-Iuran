@@ -71,12 +71,21 @@ Route::middleware(['throttle:60,1'])->group(function() {
         // Admin Iuran
         Route::get('/admin/iuran', [AdminIuranController::class, 'viewIuran'])->name('admin-view-iuran');
         Route::get('/admin/create-iuran', [AdminIuranController::class, 'createIuran'])->name('admin-create-iuran');
-
         Route::post('/admin/store-iuran', [AdminIuranController::class, 'storeIuran'])->name('admin-store-iuran');
         Route::get('/admin/edit-iuran-{id}', [AdminIuranController::class, 'editIuran'])->name('admin-edit-iuran');
         Route::get('/admin/preview-iuran-{id}', [AdminIuranController::class, 'previewIuran'])->name('admin-preview-iuran');
         Route::post('/admin/update-iuran-{id}', [AdminIuranController::class, 'updateIuran'])->name('admin-update-iuran');
         Route::get('/admin/delete-iuran-{id}', [AdminIuranController::class, 'deleteIuran'])->name('admin-delete-iuran');
+
+        //Alokasi
+        Route::get('/admin/alokasi', [AdminAlokasiController::class, 'previewIuran'])->name('admin-preview-alokasi');
+        Route::get('/admin/alokasi/{id}', [AdminAlokasiController::class, 'viewAlokasi'])->name('admin-view-alokasi');
+        Route::get('/admin/detail-alokasi/{iuranId}-{alokasiId}', [AdminAlokasiController::class, 'detailAlokasi'])->name('admin-detail-alokasi');
+        Route::get('/admin/edit-alokasi/{iuranId}-{alokasiId}', [AdminAlokasiController::class, 'editAlokasi'])->name('admin-edit-alokasi');
+        Route::put('/admin/edit-alokasi/{iuranId}-{alokasiId}', [AdminAlokasiController::class, 'updateAlokasi'])->name('admin-update-alokasi');
+        Route::delete('/admin/delete-alokasi/{iuranId}-{alokasiId}', [AdminAlokasiController::class, 'deleteAlokasi'])->name('admin-delete-alokasi');
+        Route::get('/admin/create-alokasi/{id}', [AdminAlokasiController::class, 'createAlokasi'])->name('admin-create-alokasi');
+        Route::post('/admin/create-alokasi/{id}', [AdminAlokasiController::class, 'storeAlokasi'])->name('admin-create-alokasi-store');
 
         // Pembayaran
         Route::get('/admin/pembayaran-pilih-iuran', [AdminPembayaranController::class, 'pilihIuran'])->name('admin-view-pembayaran-pilih-iuran');
