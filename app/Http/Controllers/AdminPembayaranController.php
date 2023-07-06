@@ -172,7 +172,7 @@ class AdminPembayaranController extends Controller
         ]);
 
         $iuran = Iuran::find($id);
-        $user = User::find($id);
+        $user = User::find($validated['user']);
 
         $pembayaran = array(
             'user_id' => $user->id,

@@ -60,7 +60,7 @@
                                 <td>@currency($iuran->terkumpul)</td>
                                 <td>@currency($iuran->tersisa)</td>
                                 <td>{{$iuran->status}}</td>
-                                <td style="width:10%">
+                                <td style="width:12%">
                                     <div class="">
                                         <a href="/admin/edit-iuran-{{$iuran->id}}" class="btn btn-warning">
                                             <i class="fa fa-pencil"></i>

@@ -47,10 +47,18 @@
                             <input autocomplete="off" type="text" class="form-control" name="status" id="status" spellcheck="disabled" value="{{$iuran->status}}" disabled>
                         </div>
                         <div class="col">
-                            <div class="mb-3">
-                                <label class="form-label" for="jumlah">Jumlah (Rp.) :</label>
-                                <input autocomplete="off" type="text" class="form-control" name="jumlah" id="jumlah" spellcheck="disabled" value="{{$iuran->jumlah}}" disabled>
-                            </div>
+                            <label class="form-label" for="jumlah">Jumlah (Rp.) :</label>
+                            <input autocomplete="off" type="text" class="form-control" name="jumlah" id="jumlah" spellcheck="disabled" value="Rp. {{$iuran->jumlah}}" disabled>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label class="form-label" for="status">Terkumpul :</label>
+                            <input autocomplete="off" type="text" class="form-control" name="status" id="status" spellcheck="disabled" value="Rp. {{$iuran->terkumpul}}" disabled>
+                        </div>
+                        <div class="col">
+                            <label class="form-label" for="jumlah">Tersisa :</label>
+                            <input autocomplete="off" type="text" class="form-control"  spellcheck="disabled" value="Rp. {{$iuran->tersisa}}" disabled>
                         </div>
                     </div>
                     <div class="mt-4">
@@ -88,12 +96,47 @@
                                 <td>@currency($alokasi->jumlah)</td>
                                 <td style="width:10%">
                                     <div class="">
-                                        <a href="/admin/preview-alokasi-{{$alokasi->id}}" class="btn btn-success">
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                                             <i class="fa fa-eye"></i>
-                                        </a>
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered  " role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Detail Alokasi</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <img class="img-responsive" src="{{url('alokasi_foto/'.$alokasi->foto)}}" alt="#" style="width: 50%;">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Nama</label>
+                                                <input type="text" class="form-control @error('alokasi_name') is-invalid @enderror" name="alokasi_name" value="{{$alokasi->nama}}" spellcheck="disabled" disabled readonly>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Deskripsi</label>
+                                                <textarea type="text" class="form-control @error('alokasi_deskripsi') is-invalid @enderror" name="alokasi_deskripsi" rows="4" spellcheck="disabled" disabled readonly>{{$alokasi->deskripsi}}</textarea>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Jumlah (Rp.)</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text">Rp.</span>
+                                                    <input type="number" class="form-control @error('alokasi_jumlah') is-invalid @enderror" name="alokasi_jumlah" value="{{$alokasi->jumlah}}" spellcheck="disabled" disabled readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             @endforeach
                         </tbody>
                     </table>

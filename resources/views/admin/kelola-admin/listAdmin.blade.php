@@ -78,7 +78,7 @@
                             @foreach($admins as $admin)
                             @if($admin->role == 'Admin')
                             <tr>
-                                <td>{{$loop->iteration-1}}</td>
+                                <td>{{$loop->iteration}}</td>
                                 <td>{{$admin->username}}</td>
                                 <!-- <td>{{Illuminate\Support\Str::limit($admin->password, $limit = 10, $end = '...')}}</td> -->
                                 <td>{{$admin->role}}</td>

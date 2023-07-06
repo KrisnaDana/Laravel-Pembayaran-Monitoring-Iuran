@@ -47,9 +47,19 @@
                             <input autocomplete="off" type="text" class="form-control" name="status" id="status" spellcheck="disabled" value="{{$iuran->status}}" disabled>
                         </div>
                         <div class="col">
+                            <label class="form-label" for="jumlah">Jumlah (Rp.) :</label>
+                            <input autocomplete="off" type="text" class="form-control"  spellcheck="disabled" value="Rp. {{$iuran->jumlah}}" disabled>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label class="form-label" for="status">Terkumpul :</label>
+                            <input autocomplete="off" type="text" class="form-control" name="status" id="status" spellcheck="disabled" value="Rp. {{$iuran->terkumpul}}" disabled>
+                        </div>
+                        <div class="col">
                             <div class="mb-3">
-                                <label class="form-label" for="jumlah">Jumlah (Rp.) :</label>
-                                <input autocomplete="off" type="text" class="form-control"  spellcheck="disabled" value="{{$iuran->jumlah}}" disabled>
+                                <label class="form-label" for="jumlah">Tersisa :</label>
+                                <input autocomplete="off" type="text" class="form-control"  spellcheck="disabled" value="Rp. {{$iuran->tersisa}}" disabled>
                             </div>
                         </div>
                     </div>
