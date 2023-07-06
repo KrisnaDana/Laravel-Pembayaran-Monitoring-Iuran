@@ -12,7 +12,7 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb" class="bg-transparent" style="background-color:transparent;">
         <li class="breadcrumb-item"><u class="blue1_color"><a class="blue1_color" href="{{route('user-view-iuran')}}">Iuran</a></u></li>
-        <li class="breadcrumb-item active" aria-current="page">Detail Iuran</li>
+        <li class="breadcrumb-item active" aria-current="page">Bayar Iuran</li>
     </ol>
 </nav>   
 
@@ -21,7 +21,7 @@
         <div class="white_shd full margin_bottom_30">
         <div class="full graph_head">
                 <div class="heading1 margin_0">
-                <h2>Detail Iuran</h2>
+                <h2>Bayar Iuran</h2>
                 </div>
             </div>
             
@@ -49,15 +49,33 @@
                         <div class="col">
                             <div class="mb-3">
                                 <label class="form-label" for="jumlah">Jumlah (Rp.) :</label>
-                                <input autocomplete="off" type="text" class="form-control" name="jumlah" id="jumlah" spellcheck="disabled" value="{{$iuran->jumlah}}" disabled>
+                                <input autocomplete="off" type="text" class="form-control"  spellcheck="disabled" value="{{$iuran->jumlah}}" disabled>
                             </div>
                         </div>
                     </div>
-                    <div class="mt-4">
-                        <div class="button_block">
-                            <a href="{{route('user-view-iuran')}}" type="button" class="btn cur-p btn-primary">Back</a>
+                    <form action="{{route('user-bayar-iuran-submit', ['id' => $iuran->id])}}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="mb-3">
+                            <label class="form-label" for="jumlah">Jumlah Bayar (Rp.) :</label>
+                            <input autocomplete="off" type="text" class="form-control @error('jumlah') is-invalid @enderror" name="jumlah" spellcheck="disabled" value="{{old('jumlah')}}">
+                            @error('jumlah')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
-                    </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="jumlah">Bukti Pembayaran :</label>
+                            <input type="file" class="form-control" required accept=" @error('bukti_transfer') is-invalid @enderror" name="bukti_transfer">
+                            @error('jumlah')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mt-4">
+                            <div class="button_block">
+                                <a href="{{route('user-view-iuran')}}" type="button" class="btn cur-p btn-danger">Submit</a>
+                                <button type="submit" class="btn cur-p btn-primary">Back</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
         </div>
     </div>

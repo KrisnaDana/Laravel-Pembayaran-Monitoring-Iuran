@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SIBAMI</title>
-    <link rel="icon" type="image/png" href="{{url('img/icon.png')}}">
+    <link rel="icon" type="image/png" href="{{url('/sibami.png')}}">
     <link rel="stylesheet" href="{{url('/pluto/css/bootstrap.min.css')}}" />
     <link rel="stylesheet" href="{{url('/pluto/style.css')}}" />
     <link rel="stylesheet" href="{{url('/pluto/css/responsive.css')}}" />
@@ -81,7 +81,7 @@
                                         <li><a href="{{route('admin-view-list-user')}}"><i class="fa fa-wrench green_color"></i> <span>Kelola User</span></a></li>
                                         @endif
                                         @if(!empty($admin))
-                                        <li><a href="#"><i class="fa fa-university yellow_color"></i> <span>Iuran</span></a></li>
+                                        <li><a href="{{route('admin-view-iuran')}}"><i class="fa fa-university yellow_color"></i> <span>Iuran</span></a></li>
 
                                         <li><a href="{{ route('admin-preview-alokasi') }}"><i class="fa fa-fire purple_color"></i> <span>Alokasi</span></a></li>
                                         <li><a href="{{route('admin-view-periode-pilih-iuran')}}"><i class="fa fa-flag red_color"></i> <span>Periode</span></a></li>
@@ -90,9 +90,11 @@
                                         @endif
                                         @if(!empty($user))
                                         <li><a href="{{route('view-dashboard')}}"><i class="fa fa-calendar-o green_color"></i> <span>Dashboard</span></a></li>
-                                        <li><a href="#"><i class="fa fa-graduation-cap blue1_color"></i> <span>Iuran</span></a></li>
+                                        <li><a href="{{route('user-view-iuran')}}"><i class="fa fa-graduation-cap blue1_color"></i> <span>Iuran</span></a></li>
                                         <li><a href="#"><i class="fa fa-group orange_color"></i> <span>Pembayaran</span></a></li>
+                                        @if($user->verifikasi != "Terverifikasi")
                                         <li><a href="{{route('view-verifikasi')}}"><i class="fa fa-file red_color"></i> <span>Verifikasi Akun</span></a></li>
+                                        @endif
                                         @endif
                                   </ul>
                               </header>
@@ -103,23 +105,21 @@
                                 <div class="full">
                                     <button type="button" id="sidebarCollapse" class="sidebar_toggle"><i class="fa fa-bars"></i></button>
                                     <div class="logo_section">
-                                        <a href="#"><img class="img-responsive" src="{{url('/img/logo-sd-2023.png')}}" alt="#" /></a>
+                                        <a href="#"><img class="img-responsive" src="{{url('/sibami.png')}}" alt="#" /></a>
                                     </div>
                                     <div class="right_topbar">
                                         <div class="icon_info">
                                             <ul class="user_profile_dd">
                                                 <li>
                                                     @if(!empty($admin))
-                                                        <a class="dropdown-toggle" data-toggle="dropdown"><img class="img-responsive rounded-circle" src="{{url('/img/logo-sd-2023.png')}}" alt="profile" /><span class="name_user">{{Auth::guard('admin')->user()->username}}</span></a>
+                                                        <a class="dropdown-toggle" data-toggle="dropdown"><img class="img-responsive rounded-circle" src="{{url('/sibami.png')}}" alt="profile" /><span class="name_user">{{Auth::guard('admin')->user()->username}}</span></a>
                                                         <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="#">Profile</a>
                                                             <a class="dropdown-item" href="{{route('admin-logout')}}">Log Out</a>
                                                         </div>
                                                     @endif
                                                     @if(!empty($user))
-                                                        <a class="dropdown-toggle" data-toggle="dropdown"><img class="img-responsive rounded-circle" src="{{url('/img/logo-sd-2023.png')}}" alt="profile" /><span class="name_user">{{Auth::guard('user')->user()->username}}</span></a>
+                                                        <a class="dropdown-toggle" data-toggle="dropdown"><img class="img-responsive rounded-circle" src="{{url('/sibami.png')}}" alt="profile" /><span class="name_user">{{Auth::guard('user')->user()->username}}</span></a>
                                                         <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="#">Profile</a>
                                                             <a class="dropdown-item" href="{{route('logout')}}">Log Out</a>
                                                         </div>
                                                     @endif

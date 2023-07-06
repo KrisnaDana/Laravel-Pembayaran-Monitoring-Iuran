@@ -8,7 +8,7 @@ use App\Models\Periode;
 use App\Models\Alokasi;
 use App\Models\Pembayaran;
 use App\Models\PeriodeBayar;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class UserIuranController extends Controller
@@ -30,10 +30,53 @@ class UserIuranController extends Controller
         $periodebayar = DB::table('periodes')
                         ->leftJoin('periode_bayars', 'periodes.id', '=', 'periode_bayars.periode_id')// joining the contacts table , where user_id and contact_user_id are same
                         ->select('periodes.*', 'periode_bayars.user_id', 'periode_bayars.status')
+                        ->where('periodes.iuran_id', '=', $iuran->id)
                         ->where('periode_bayars.user_id','=', $user)->orWhere('periode_bayars.user_id','=', null)
                         ->get();
         // dd($periodebayar);
         return view('user.iuran.previewIuran', compact('iuran', 'periodes', 'alokasis','periodebayar'));
+    }
+
+    public function bayar($id){
+        // dd(Auth::guard('admin')->user()->role == 'Master');
+        $user = Auth::guard('user')->user()->id;
+        $iuran = Iuran::find($id);
+        $alokasis = Alokasi::where('iuran_id', $id)->get();
+        $periodes = Periode::where('iuran_id', $id)->get();
+        // $periodebayar = PeriodeBayar::where('user_id', $user)->get();
+        $periodebayar = DB::table('periodes')
+                        ->leftJoin('periode_bayars', 'periodes.id', '=', 'periode_bayars.periode_id')// joining the contacts table , where user_id and contact_user_id are same
+                        ->select('periodes.*', 'periode_bayars.user_id', 'periode_bayars.status')
+                        ->where('periodes.iuran_id', '=', $iuran->id)
+                        ->where('periode_bayars.user_id','=', $user)->orWhere('periode_bayars.user_id','=', null)
+                        ->get();
+        // dd($periodebayar);
+        return view('user.iuran.bayar', compact('iuran', 'periodes', 'alokasis','periodebayar'));
+    }
+
+    public function bayarSubmit($id, Request $request){
+        $validated = $request->validate([
+            'jumlah' => 'required|integer|min:1',
+            'bukti_pembayaran' => 'required|file|image|max:10000',
+        ]);
+
+        $user = Auth::guard('user')->user();
+        $image = $request->file('bukti_pembayaran');
+        $filename = $user->username . '-' . time() . '.' . $image->getClientOriginalExtension();
+        $path = public_path('/bukti-transfer-user');
+        $image->move($path, $filename);
+
+        $pembayaran = array(
+            'user_id' => $user->id,
+            'iuran_id' => $id,
+            'metode' => 'Online',
+            'jumlah' => $validated['jumlah'],
+            'bukti_transfer' => $filename,
+            'status' => 'Mengajukan pembayaran',
+        );
+
+        Pembayaran::create($pembayaran);
+        return redirect()->route('user-pembayaran')->with(['toast.type' => 'success', 'toast.message' => 'Berhasil melakukan pembayaran. Menunggu verifikasi admin.']);
     }
 
     public function createIuran() {
@@ -120,7 +163,7 @@ class UserIuranController extends Controller
         return view('user.iuran.editIuran', compact('iuran'));
     }
 
-    public function updateIuran($id) {
+    public function updateIuran($id, Request $request) {
         // dd($request);
         $this->validate($request,[
             'nama' => 'required|string',

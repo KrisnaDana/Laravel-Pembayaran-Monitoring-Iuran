@@ -33,19 +33,20 @@
                                     </div>
                                     <div class="cont_table_price">
                                         <ul>
-                                            <li><a href="#">Tanggal Mulai : {{$iuran->mulai}}</a></li>
-                                            <li><a href="#">Tanggal Akhir : {{$iuran->akhir}}</a></li>
+                                            <li><a href="#">Status : {{$iuran->status}}</a></li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="price_table_bottom">
                                     <div class="row">
                                         <div class="col">
-                                            <div class="center"><a class="main_bt bg-primary" href="/user/preview-iuran-{{$iuran->id}}"><i class="fa fa-eye"></i>  Lihat</a></div>
+                                            <div class="center"><a class="main_bt bg-primary" href="{{route('user-preview-iuran', ['id' => $iuran->id])}}"><i class="fa fa-eye"></i>  Lihat</a></div>
                                         </div>
+                                        @if($iuran->status == "Buka")
                                         <div class="col">
-                                            <div class="center"><a class="main_bt btn-success" href="#">Bayar</a></div>
+                                            <div class="center"><a class="main_bt btn-success" href="{{route('user-bayar-iuran', ['id' => $iuran->id])}}">Bayar</a></div>
                                         </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

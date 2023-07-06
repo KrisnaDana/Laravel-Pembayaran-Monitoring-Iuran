@@ -49,39 +49,9 @@
                             </select>
                         </div>
                         <div class="col">
-                            <label class="form-label" for="jenis">Jenis :</label>
-                            <select class="form-control" name="jenis" id="jenis" aria-label="Default select example" >
-                                <option selected>Pilih Jenis</option>
-                                <option @if ($iuran->jenis == 'Sekali') selected="selected" @endif value="Sekali">Sekali</option>
-                                <option @if ($iuran->jenis == 'Periodik') selected="selected" @endif value="Periodik">Periodik</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="mb-3">
+                            <div class="">
                                 <label class="form-label" for="jumlah">Jumlah (Rp.) :</label>
                                 <input autocomplete="off" type="text" class="form-control" name="jumlah" id="jumlah" spellcheck="disabled" value="{{$iuran->jumlah}}">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="mb-3">
-                                <label class="form-label" for="jarak_periode">Jarak Periode (Hari) :</label>
-                                <input autocomplete="off" type="number" class="form-control" name="jarak_periode" id="jarak_periode" spellcheck="disabled" value="{{$iuran->jarak_periode}}">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="mb-3">
-                                <label class="form-label" for="mulai">Tanggal Mulai :</label>
-                                <input autocomplete="off" type="date" class="form-control" name="mulai" id="mulai" spellcheck="disabled" value="{{$iuran->mulai}}">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="mb-3">
-                                <label class="form-label" for="akhir">Tanggal Berakhir :</label>
-                                <input autocomplete="off" type="date" class="form-control" name="akhir" id="akhir" spellcheck="disabled" value="{{$iuran->akhir}}">
                             </div>
                         </div>
                     </div>

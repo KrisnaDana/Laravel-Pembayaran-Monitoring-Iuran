@@ -61,52 +61,10 @@
                             @enderror
                         </div>
                         <div class="col">
-                            <label class="form-label" for="jenis">Jenis :</label>
-                            <select class="form-control @error('status') is-invalid @enderror" name="jenis" id="jenis" aria-label="Default select example" >
-                                <option value="">Pilih Jenis</option>
-                                <option value="Sekali">Sekali</option>
-                                <option value="Periodik">Periodik</option>
-                            </select>
-                            @error ('jenis')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
                             <div class="mb-3">
                                 <label class="form-label" for="jumlah">Jumlah (Rp.) :</label>
                                 <input autocomplete="off" type="text" class="form-control @error('jumlah') is-invalid @enderror" name="jumlah" id="jumlah" spellcheck="disabled" value="">
                                 @error ('jumlah')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="mb-3">
-                                <label class="form-label" for="jarak_periode">Jarak Periode (Hari) :</label>
-                                <input autocomplete="off" type="number" class="form-control @error('jarak_periode') is-invalid @enderror" name="jarak_periode" id="jarak_periode" spellcheck="disabled" value="">
-                                @error ('jarak_periode')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="mb-3">
-                                <label class="form-label" for="mulai">Tanggal Mulai :</label>
-                                <input autocomplete="off" type="date" class="form-control @error('mulai') is-invalid @enderror" name="mulai" id="mulai" spellcheck="disabled" value="">
-                                @error ('mulai')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="mb-3">
-                                <label class="form-label" for="akhir">Tanggal Berakhir :</label>
-                                <input autocomplete="off" type="date" class="form-control @error('akhir') is-invalid @enderror" name="akhir" id="akhir" spellcheck="disabled" value="">
-                                @error ('akhir')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>

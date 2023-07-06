@@ -31,9 +31,8 @@ use App\Http\Controllers\UserPembayaranController;
 
 Route::middleware(['throttle:60,1'])->group(function () {
     Route::middleware([Guest::class])->group(function () {
-        Route::get('/', [GuestController::class, 'index'])->name('index');
-        Route::get('/login', [UserAuthController::class, 'viewLogin'])->name('view-login');
-        Route::post('/login', [UserAuthController::class, 'login'])->name('login');
+        Route::get('/', [UserAuthController::class, 'viewLogin'])->name('view-login');
+        Route::post('/', [UserAuthController::class, 'login'])->name('login');
         Route::get('/register', [UserAuthController::class, 'viewRegister'])->name('view-register');
         Route::post('/register', [UserAuthController::class, 'register'])->name('register');
         Route::get('/admin/login', [AdminAuthController::class, 'viewLogin'])->name('admin-view-login');
@@ -53,13 +52,16 @@ Route::middleware(['throttle:60,1'])->group(function () {
         Route::get('/dashboard', [UserAuthController::class, 'viewDashboard'])->name('view-dashboard');
 
         // User Iuran
-        Route::get('/user/iuran', [UserIuranController::class, 'viewIuran'])->name('user-view-iuran');
-        Route::get('/user/create-iuran', [UserIuranController::class, 'createIuran'])->name('user-create-iuran');
-        Route::post('/user/store-iuran', [UserIuranController::class, 'storeIuran'])->name('user-store-iuran');
-        Route::get('/user/edit-iuran-{id}', [UserIuranController::class, 'editIuran'])->name('user-edit-iuran');
-        Route::get('/user/preview-iuran-{id}', [UserIuranController::class, 'previewIuran'])->name('user-preview-iuran');
-        Route::post('/user/update-iuran-{id}', [UserIuranController::class, 'updateIuran'])->name('user-update-iuran');
-        Route::get('/user/delete-iuran-{id}', [UserIuranController::class, 'deleteIuran'])->name('user-delete-iuran');
+        Route::get('/iuran', [UserIuranController::class, 'viewIuran'])->name('user-view-iuran');
+        Route::get('/preview-iuran-{id}', [UserIuranController::class, 'previewIuran'])->name('user-preview-iuran');
+        Route::get('/bayar-iuran-{id}', [UserIuranController::class, 'bayar'])->name('user-bayar-iuran');
+        Route::post('/bayar-iuran-{id}', [UserIuranController::class, 'bayarSubmit'])->name('user-bayar-iuran-submit');
+
+        // User Pembayaran
+        Route::get('/pembayaran', [UserPembayaranController::class, 'index'])->name('index-pembayaran');
+        Route::get('/pembayaran-{id}', [UserPembayaranController::class, 'read'])->name('read-pembayaran');
+        Route::get('/pembayaran-edit-{id}', [UserPembayaranController::class, 'edit'])->name('edit-pembayaran');
+        Route::post('/pembayaran-edit-{id}', [UserPembayaranController::class, 'editSubmit'])->name('edit-pembayaran-submit');
     });
 
     Route::middleware([Admin::class])->group(function () {

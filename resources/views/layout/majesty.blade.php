@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="{{url('/majesty/vendors/mdi/css/materialdesignicons.min.css')}}">
         <link rel="stylesheet" href="{{url('/majesty/vendors/base/vendor.bundle.base.css')}}">
         <link rel="stylesheet" href="{{url('/majesty/css/style.css')}}">
-        <link rel="icon" type="image/png" href="{{url('img/icon.png')}}">
+        <link rel="icon" type="image/png" href="{{url('sibami.png')}}">
     </head>
     <body>
         <div class="container-scroller">
@@ -16,9 +16,9 @@
                     <div class="row w-100 mx-0">
                         <div class="col-lg-4 mx-auto">
                             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-                                <!-- <div class="brand-logo text-center">
-                                    <img src="{{url('/img/logo-sd-2023.png')}}" alt="logo">
-                                </div> -->
+                                <div class="brand-logo text-center">
+                                    <img src="{{url('/sibami.png')}}" alt="logo">
+                                </div>
                                 @yield('content')
                             </div>
                         </div>

@@ -152,6 +152,9 @@ class AdminPembayaranController extends Controller
                 }
                 PeriodeBayar::insert($periode_bayar);
             }
+            $iuran->terkumpul = $iuran->terkumpul + $pembayaran->jumlah;
+            $iuran->tersisa = $iuran->tersisa + $pembayaran->jumlah;
+            $iuran->save();
         }
         return redirect()->route('admin-view-pembayaran', ['id' => $id])->with(['toast.type' => 'success', 'toast.message' => 'Berhasil mengubah status pembayaran.']);
     }
@@ -268,6 +271,9 @@ class AdminPembayaranController extends Controller
             }
             PeriodeBayar::insert($periode_bayar);
         }
+        $iuran->terkumpul = $iuran->terkumpul + $validated['jumlah'];
+        $iuran->tersisa = $iuran->tersisa + $validated['jumlah'];
+        $iuran->save();
         return redirect()->route('admin-view-pembayaran', ['id' => $id])->with(['toast.type' => 'success', 'toast.message' => 'Berhasil menambah pembayaran.']);
     }
 
