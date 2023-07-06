@@ -52,7 +52,7 @@
                     <div class="col">
                         <div class="mb-3">
                             <label class="form-label">Tanggal :</label>
-                            <input autocomplete="off" type="date" class="form-control" name="berakhir" id="berakhir" spellcheck="disabled" value="{{$pembayaran->tanggal}}" readonly>
+                            <input autocomplete="off" type="date" class="form-control" name="berakhir" id="berakhir" spellcheck="disabled" value="{{Carbon\Carbon::parse($pembayaran->created_at)->format('Y-m-d')}}" readonly>
                         </div>
                     </div>
                 </div>
@@ -63,6 +63,7 @@
                 @if(!empty($pembayaran->bukti_transfer))
                 <div class="mb-3">
                     <label class="form-label">Bukti Transfer :</label>
+                    <br>
                     <img src="{{ url('bukti-transfer-user/'.$pembayaran->bukti_transfer) }}" width="500px"></img>
                 </div>
                 @endif

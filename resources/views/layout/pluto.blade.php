@@ -63,8 +63,10 @@
                                     <h4 class="text-center">SIBAMI</h4>
                                     @endif
                                     <ul class="list-unstyled components">
-                                        @if(!empty($admin) && $admin->role == "Master")
+                                        @if(!empty($admin))
                                         <li><a href="{{route('admin-view-dashboard')}}"><i class="fa fa-bar-chart-o red_color"></i> <span>Dashboard</span></a></li>
+                                        @endif
+                                        @if(!empty($admin) && $admin->role == "Master")
                                         <li>
                                             <a href="#tour" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-wrench green_color"></i> <span>Kelola Akun</span></a>
                                             <ul class="collapse list-unstyled" id="tour">
@@ -91,7 +93,7 @@
                                         @if(!empty($user))
                                         <li><a href="{{route('view-dashboard')}}"><i class="fa fa-calendar-o green_color"></i> <span>Dashboard</span></a></li>
                                         <li><a href="{{route('user-view-iuran')}}"><i class="fa fa-graduation-cap blue1_color"></i> <span>Iuran</span></a></li>
-                                        <li><a href="#"><i class="fa fa-group orange_color"></i> <span>Pembayaran</span></a></li>
+                                        <li><a href="{{route('index-pembayaran')}}"><i class="fa fa-group orange_color"></i> <span>Pembayaran</span></a></li>
                                         @if($user->verifikasi != "Terverifikasi")
                                         <li><a href="{{route('view-verifikasi')}}"><i class="fa fa-file red_color"></i> <span>Verifikasi Akun</span></a></li>
                                         @endif

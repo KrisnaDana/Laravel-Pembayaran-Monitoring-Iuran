@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Admin;
+use App\Models\Iuran;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -35,14 +36,16 @@ class AdminAuthController extends Controller
     }
 
     public function viewDashboard(): View {
-        return view('admin.dashboard');
-    }
+        $terkumpul = 0;
+        $digunakan = 0;
+        $tersisa = 0;
 
-    public function profile(): View {
-        return view('admin.profile');
-    }
-
-    public function editProfile(): RedirectResponse {
-        //
+        $iurans = Iuran::all();
+        foreach($iurans as $iuran){
+            $terkumpul = $terkumpul + $iuran->terkumpul;
+            $digunakan = $digunakan + ($iuran->terkumpul - $iuran->tersisa);
+            $tersisa = $tersisa + ($iuran->tersisa);
+        }
+        return view('admin.dashboard', compact('terkumpul', 'digunakan', 'tersisa'));
     }
 }

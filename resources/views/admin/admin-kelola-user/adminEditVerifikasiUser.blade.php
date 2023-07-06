@@ -16,6 +16,13 @@
         </div>
     </div>
 </div>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb" class="bg-transparent" style="background-color:transparent;">
+        <li class="breadcrumb-item"><u class="blue1_color"><a class="blue1_color" href="{{route('admin-view-list-user')}}">List User</a></u></li>
+        <li class="breadcrumb-item"><u class="blue1_color"><a class="blue1_color" href="{{route('admin-view-list-verifikasi-user')}}">List Verifikasi User</a></u></li>
+        <li class="breadcrumb-item active" aria-current="page">Edit Akun User</li>
+    </ol>
+</nav>
 <div class="row">
     <div class="col">
         <div class="white_shd full margin_bottom_30">

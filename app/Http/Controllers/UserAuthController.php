@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Iuran;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
 
@@ -71,22 +72,17 @@ class UserAuthController extends Controller
 
     public function dashboard(): View
     {
-        return view('user.dashboard');
-    }
+        $terkumpul = 0;
+        $digunakan = 0;
+        $tersisa = 0;
 
-    public function viewDashboard(): View
-    {
-        return view('user.dashboard');
-    }
-
-    public function profile(): View
-    {
-        return view('user.profile');
-    }
-
-    public function editProfile(): RedirectResponse
-    {
-        //
+        $iurans = Iuran::all();
+        foreach($iurans as $iuran){
+            $terkumpul = $terkumpul + $iuran->terkumpul;
+            $digunakan = $digunakan + ($iuran->terkumpul - $iuran->tersisa);
+            $tersisa = $tersisa + ($iuran->tersisa);
+        }
+        return view('user.dashboard', compact('terkumpul', 'digunakan', 'tersisa'));
     }
 
     public function viewVerifikasi(): View

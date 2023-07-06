@@ -49,7 +49,7 @@ Route::middleware(['throttle:60,1'])->group(function () {
     });
 
     Route::middleware([UserTerverifikasi::class])->group(function () {
-        Route::get('/dashboard', [UserAuthController::class, 'viewDashboard'])->name('view-dashboard');
+        Route::get('/dashboard', [UserAuthController::class, 'dashboard'])->name('view-dashboard');
 
         // User Iuran
         Route::get('/iuran', [UserIuranController::class, 'viewIuran'])->name('user-view-iuran');
@@ -60,8 +60,8 @@ Route::middleware(['throttle:60,1'])->group(function () {
         // User Pembayaran
         Route::get('/pembayaran', [UserPembayaranController::class, 'index'])->name('index-pembayaran');
         Route::get('/pembayaran-{id}', [UserPembayaranController::class, 'read'])->name('read-pembayaran');
-        Route::get('/pembayaran-edit-{id}', [UserPembayaranController::class, 'edit'])->name('edit-pembayaran');
-        Route::post('/pembayaran-edit-{id}', [UserPembayaranController::class, 'editSubmit'])->name('edit-pembayaran-submit');
+        Route::get('/edit-pembayaran-{id}', [UserPembayaranController::class, 'edit'])->name('edit-pembayaran');
+        Route::post('/edit-pembayaran-{id}', [UserPembayaranController::class, 'editSubmit'])->name('edit-pembayaran-submit');
     });
 
     Route::middleware([Admin::class])->group(function () {

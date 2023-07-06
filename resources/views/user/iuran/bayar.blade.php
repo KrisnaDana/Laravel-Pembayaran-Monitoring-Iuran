@@ -64,15 +64,15 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="jumlah">Bukti Pembayaran :</label>
-                            <input type="file" class="form-control" required accept=" @error('bukti_transfer') is-invalid @enderror" name="bukti_transfer">
-                            @error('jumlah')
+                            <input type="file" class="form-control @error('bukti_pembayaran') is-invalid @enderror" required name="bukti_pembayaran">
+                            @error('bukti_pembayaran')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mt-4">
                             <div class="button_block">
-                                <a href="{{route('user-view-iuran')}}" type="button" class="btn cur-p btn-danger">Submit</a>
-                                <button type="submit" class="btn cur-p btn-primary">Back</button>
+                                <a href="{{route('user-view-iuran')}}" type="button" class="btn cur-p btn-danger">Back</a>
+                                <button type="submit" class="btn cur-p btn-primary">Submit</button>
                             </div>
                         </div>
                     </form>

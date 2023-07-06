@@ -76,7 +76,7 @@ class UserIuranController extends Controller
         );
 
         Pembayaran::create($pembayaran);
-        return redirect()->route('user-pembayaran')->with(['toast.type' => 'success', 'toast.message' => 'Berhasil melakukan pembayaran. Menunggu verifikasi admin.']);
+        return redirect()->route('index-pembayaran')->with(['toast.type' => 'success', 'toast.message' => 'Berhasil melakukan pembayaran. Menunggu verifikasi admin.']);
     }
 
     public function createIuran() {
